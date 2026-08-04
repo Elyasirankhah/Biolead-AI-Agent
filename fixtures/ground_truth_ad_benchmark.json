@@ -1,0 +1,289 @@
+{
+  "dataset": "BioLead AD Ground-Truth Benchmark v1",
+  "disease": "Atopic dermatitis",
+  "purpose": "Curated evaluation labels for passenger vs driver prioritization. Not RAG. Labels are research-use judgment based on genetics + causal perturbation + clinical pharmacology hierarchy.",
+  "created": "2026-08-04",
+  "label_policy": {
+    "driver": "At least two independent strong pillars (genetics and/or perturbation and/or target-engaging clinical efficacy).",
+    "passenger": "Clear disease association (often expression/biomarker) without adequate causal/pharmacologic rescue for the gene itself.",
+    "insufficient_evidence": "Real biology present, but missing enough independent causal + actionable pillars to call Driver or Passenger confidently."
+  },
+  "validation": {
+    "method": "Europe PMC REST (EXT_ID + SRC:MED)",
+    "report_file": "fixtures/reference_validation_report.json",
+    "checklist_file": "fixtures/ground_truth_reference_checklist.csv",
+    "note": "Only PMIDs marked VALID in the report are used below. Invalid guessed IDs were discarded."
+  },
+  "cases": [
+    {
+      "gene": "IL4R",
+      "ensembl_id": "ENSG00000077238",
+      "expected_role": "driver",
+      "confidence_for_label": "high",
+      "rationale": "IL-4Rα is the clinical target of dupilumab; Phase 3 AD efficacy plus pathway coherence.",
+      "key_references": [
+        {
+          "pmid": "27690741",
+          "role": "clinical_pharmacology",
+          "title": "Two Phase 3 Trials of Dupilumab versus Placebo in Atopic Dermatitis.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27690741/"
+        },
+        {
+          "pmid": "25006719",
+          "role": "clinical_pharmacology",
+          "title": "Dupilumab treatment in adults with moderate-to-severe atopic dermatitis.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25006719/"
+        },
+        {
+          "pmid": null,
+          "role": "human_genetics_resource",
+          "title": "Open Targets associations for IL4R",
+          "url": "https://platform.opentargets.org/target/ENSG00000077238/associations"
+        }
+      ]
+    },
+    {
+      "gene": "IL13",
+      "ensembl_id": "ENSG00000169194",
+      "expected_role": "driver",
+      "confidence_for_label": "high",
+      "rationale": "Direct IL-13 neutralization with tralokinumab and lebrikizumab shows Phase 3 AD efficacy.",
+      "key_references": [
+        {
+          "pmid": "33000465",
+          "role": "clinical_pharmacology",
+          "title": "Tralokinumab for moderate-to-severe atopic dermatitis (ECZTRA 1 and ECZTRA 2).",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33000465/"
+        },
+        {
+          "pmid": "36920778",
+          "role": "clinical_pharmacology",
+          "title": "Two Phase 3 Trials of Lebrikizumab for Moderate-to-Severe Atopic Dermatitis.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36920778/"
+        },
+        {
+          "pmid": "37682422",
+          "role": "clinical_pharmacology",
+          "title": "Tralokinumab Efficacy Over 1 Year in Adults with Moderate-to-Severe Atopic Dermatitis.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37682422/"
+        }
+      ]
+    },
+    {
+      "gene": "JAK1",
+      "ensembl_id": "ENSG00000162434",
+      "expected_role": "driver",
+      "confidence_for_label": "high",
+      "rationale": "Selective JAK1 inhibitors (upadacitinib, abrocitinib) have Phase 3 AD efficacy; pathway is causal for type-2 signaling.",
+      "key_references": [
+        {
+          "pmid": "34023008",
+          "role": "clinical_pharmacology",
+          "title": "Once-daily upadacitinib versus placebo in AD (Measure Up 1 and 2).",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34023008/"
+        },
+        {
+          "pmid": "32711801",
+          "role": "clinical_pharmacology",
+          "title": "Abrocitinib JADE MONO-1 phase 3 trial in AD.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32711801/"
+        },
+        {
+          "pmid": "35262646",
+          "role": "clinical_pharmacology",
+          "title": "Longer-term upadacitinib efficacy/safety follow-up in AD.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35262646/"
+        }
+      ]
+    },
+    {
+      "gene": "IL31RA",
+      "ensembl_id": "ENSG00000115590",
+      "expected_role": "driver",
+      "confidence_for_label": "high",
+      "rationale": "Nemolizumab targets IL-31 receptor A and improves AD pruritus/disease in Phase 3 programs.",
+      "key_references": [
+        {
+          "pmid": "32640132",
+          "role": "clinical_pharmacology",
+          "title": "Trial of Nemolizumab and Topical Agents for Atopic Dermatitis with Pruritus.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32640132/"
+        },
+        {
+          "pmid": "39067461",
+          "role": "clinical_pharmacology",
+          "title": "Nemolizumab ARCADIA 1 and 2 phase 3 trials in AD.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39067461/"
+        }
+      ]
+    },
+    {
+      "gene": "STAT6",
+      "ensembl_id": "ENSG00000166888",
+      "expected_role": "driver",
+      "confidence_for_label": "moderate_high",
+      "rationale": "Human germline STAT6 GOF causes severe allergic disease including AD-like phenotype; pathway is the effector of IL-4/IL-13.",
+      "key_references": [
+        {
+          "pmid": "36884218",
+          "role": "human_genetics",
+          "title": "Human germline heterozygous gain-of-function STAT6 variants cause severe allergic disease.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36884218/"
+        },
+        {
+          "pmid": "27690741",
+          "role": "clinical_pharmacology_context",
+          "title": "Dupilumab Phase 3 AD (pathway downstream of STAT6 axis).",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27690741/"
+        }
+      ]
+    },
+    {
+      "gene": "FLG",
+      "ensembl_id": "ENSG00000143631",
+      "expected_role": "insufficient_evidence",
+      "confidence_for_label": "high",
+      "rationale": "Strong human genetics for barrier risk, but no clear target-engaging clinical rescue of filaggrin itself comparable to IL4R/IL13 drugs. Causal biology ≠ actionable driver for drug prioritization.",
+      "key_references": [
+        {
+          "pmid": "16550169",
+          "role": "human_genetics",
+          "title": "Common loss-of-function FLG variants are a major predisposing factor for atopic dermatitis.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/16550169/"
+        },
+        {
+          "pmid": null,
+          "role": "protein_resource",
+          "title": "UniProt FLG entry",
+          "url": "https://www.uniprot.org/uniprotkb/P20930/entry"
+        }
+      ]
+    },
+    {
+      "gene": "TSLP",
+      "ensembl_id": "ENSG00000145777",
+      "expected_role": "insufficient_evidence",
+      "confidence_for_label": "moderate",
+      "rationale": "Genetic association with AD exists, and biology is plausible, but AD-specific target-engaging clinical proof is weaker/less settled than IL4R/IL13/JAK1 for this benchmark.",
+      "key_references": [
+        {
+          "pmid": "20466416",
+          "role": "human_genetics",
+          "title": "Genetic variants in TSLP are associated with atopic dermatitis and eczema herpeticum.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/20466416/"
+        }
+      ]
+    },
+    {
+      "gene": "S100A8",
+      "ensembl_id": "ENSG00000143546",
+      "expected_role": "passenger",
+      "confidence_for_label": "moderate_high",
+      "rationale": "Strong inflammatory-state / Th22-related expression biomarker in AD skin; levels fall when upstream disease is treated (e.g., JAK1 inhibition). Not established as a primary causal AD drug target in humans.",
+      "key_references": [
+        {
+          "pmid": "38108208",
+          "role": "differential_expression_biomarker",
+          "title": "Effect of abrocitinib on skin biomarkers in AD (includes S100A8 downregulation with clinical improvement).",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38108208/"
+        },
+        {
+          "pmid": "39848567",
+          "role": "preclinical_counterpoint",
+          "title": "S100A8/A9 neutralizing antibody ameliorates AD-like symptoms in models (preclinical; does not overturn passenger prioritization without human causal/clinical proof).",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39848567/"
+        }
+      ]
+    },
+    {
+      "gene": "CCL17",
+      "ensembl_id": "ENSG00000108691",
+      "expected_role": "passenger",
+      "confidence_for_label": "high",
+      "rationale": "Serum TARC/CCL17 is a widely used severity biomarker that tracks disease activity; association is strong, gene-as-causal-driver evidence for AD drug discovery is not.",
+      "key_references": [
+        {
+          "pmid": "25199679",
+          "role": "differential_expression_biomarker",
+          "title": "Utility of serum TARC as a biomarker for monitoring AD severity.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25199679/"
+        },
+        {
+          "pmid": "36065100",
+          "role": "differential_expression_biomarker",
+          "title": "Serum TARC levels correlate with AD disease severity in infants.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36065100/"
+        }
+      ]
+    },
+    {
+      "gene": "IL31",
+      "ensembl_id": "ENSG00000185499",
+      "expected_role": "driver",
+      "confidence_for_label": "moderate",
+      "rationale": "IL-31 axis is clinically validated via IL31RA blockade (nemolizumab). Label gene as driver of itch/AD pathophysiology with pathway-level clinical support; receptor (IL31RA) has the cleanest drug genetics.",
+      "key_references": [
+        {
+          "pmid": "32640132",
+          "role": "clinical_pharmacology_pathway",
+          "title": "Nemolizumab (IL-31RA) Phase 3 AD pruritus trial.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32640132/"
+        },
+        {
+          "pmid": "39067461",
+          "role": "clinical_pharmacology_pathway",
+          "title": "Nemolizumab ARCADIA 1/2 Phase 3 AD trials.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39067461/"
+        }
+      ]
+    },
+    {
+      "gene": "IL4",
+      "ensembl_id": "ENSG00000113520",
+      "expected_role": "driver",
+      "confidence_for_label": "moderate_high",
+      "rationale": "Core type-2 cytokine; clinical validation is via IL4R blockade (dupilumab) that inhibits IL-4 and IL-13 signaling.",
+      "key_references": [
+        {
+          "pmid": "27690741",
+          "role": "clinical_pharmacology_pathway",
+          "title": "Dupilumab Phase 3 AD trials (blocks IL-4/IL-13 via IL-4Rα).",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27690741/"
+        },
+        {
+          "pmid": "25006719",
+          "role": "clinical_pharmacology_pathway",
+          "title": "Dupilumab treatment in adults with moderate-to-severe AD.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25006719/"
+        }
+      ]
+    },
+    {
+      "gene": "S100A9",
+      "ensembl_id": "ENSG00000163220",
+      "expected_role": "passenger",
+      "confidence_for_label": "moderate_high",
+      "rationale": "Often co-expressed with S100A8 as calprotectin/inflammatory skin biomarker; treated as passenger/biomarker unless human causal clinical proof appears.",
+      "key_references": [
+        {
+          "pmid": "38108208",
+          "role": "differential_expression_biomarker",
+          "title": "Abrocitinib skin biomarker study (S100 family markers fall with disease improvement).",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38108208/"
+        },
+        {
+          "pmid": "39848567",
+          "role": "preclinical_counterpoint",
+          "title": "S100A8/A9 neutralizing antibody preclinical AD-like benefit.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39848567/"
+        }
+      ]
+    }
+  ],
+  "summary_counts": {
+    "driver": 7,
+    "passenger": 3,
+    "insufficient_evidence": 2,
+    "total_genes": 12
+  }
+}

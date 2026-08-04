@@ -1,0 +1,27 @@
+﻿gene,expected_role,pmid,ref_role,status,year,title,pubmed_url
+IL4R,driver,27690741,clinical_pharmacology,VALID,2016,"Two Phase 3 Trials of Dupilumab versus Placebo in Atopic Dermatitis.",https://pubmed.ncbi.nlm.nih.gov/27690741/
+IL4R,driver,25006719,clinical_pharmacology,VALID,2014,"Dupilumab treatment in adults with moderate-to-severe atopic dermatitis.",https://pubmed.ncbi.nlm.nih.gov/25006719/
+IL4R,driver,,human_genetics_resource,URL_ONLY,,"Open Targets associations for IL4R",https://platform.opentargets.org/target/ENSG00000077238/associations
+IL13,driver,33000465,clinical_pharmacology,VALID,2021,"Tralokinumab for moderate-to-severe atopic dermatitis (ECZTRA 1 and ECZTRA 2).",https://pubmed.ncbi.nlm.nih.gov/33000465/
+IL13,driver,36920778,clinical_pharmacology,VALID,2023,"Two Phase 3 Trials of Lebrikizumab for Moderate-to-Severe Atopic Dermatitis.",https://pubmed.ncbi.nlm.nih.gov/36920778/
+IL13,driver,37682422,clinical_pharmacology,VALID,2023,"Tralokinumab Efficacy Over 1 Year in Adults with Moderate-to-Severe Atopic Dermatitis.",https://pubmed.ncbi.nlm.nih.gov/37682422/
+JAK1,driver,34023008,clinical_pharmacology,VALID,2021,"Once-daily upadacitinib versus placebo in AD (Measure Up 1 and 2).",https://pubmed.ncbi.nlm.nih.gov/34023008/
+JAK1,driver,32711801,clinical_pharmacology,VALID,2020,"Abrocitinib JADE MONO-1 phase 3 trial in AD.",https://pubmed.ncbi.nlm.nih.gov/32711801/
+JAK1,driver,35262646,clinical_pharmacology,VALID,2022,"Longer-term upadacitinib efficacy/safety follow-up in AD.",https://pubmed.ncbi.nlm.nih.gov/35262646/
+IL31RA,driver,32640132,clinical_pharmacology,VALID,2020,"Trial of Nemolizumab and Topical Agents for Atopic Dermatitis with Pruritus.",https://pubmed.ncbi.nlm.nih.gov/32640132/
+IL31RA,driver,39067461,clinical_pharmacology,VALID,2024,"Nemolizumab ARCADIA 1 and 2 phase 3 trials in AD.",https://pubmed.ncbi.nlm.nih.gov/39067461/
+STAT6,driver,36884218,human_genetics,VALID,2023,"Human germline heterozygous gain-of-function STAT6 variants cause severe allergic disease.",https://pubmed.ncbi.nlm.nih.gov/36884218/
+STAT6,driver,27690741,clinical_pharmacology_context,VALID,2016,"Dupilumab Phase 3 AD (pathway downstream of STAT6 axis).",https://pubmed.ncbi.nlm.nih.gov/27690741/
+FLG,insufficient_evidence,16550169,human_genetics,VALID,2006,"Common loss-of-function FLG variants are a major predisposing factor for atopic dermatitis.",https://pubmed.ncbi.nlm.nih.gov/16550169/
+FLG,insufficient_evidence,,protein_resource,URL_ONLY,,"UniProt FLG entry",https://www.uniprot.org/uniprotkb/P20930/entry
+TSLP,insufficient_evidence,20466416,human_genetics,VALID,2010,"Genetic variants in TSLP are associated with atopic dermatitis and eczema herpeticum.",https://pubmed.ncbi.nlm.nih.gov/20466416/
+S100A8,passenger,38108208,differential_expression_biomarker,VALID,2024,"Effect of abrocitinib on skin biomarkers in AD (includes S100A8 downregulation with clinical improvement).",https://pubmed.ncbi.nlm.nih.gov/38108208/
+S100A8,passenger,39848567,preclinical_counterpoint,VALID,2025,"S100A8/A9 neutralizing antibody ameliorates AD-like symptoms in models (preclinical; does not overturn passenger prioritization without human causal/clinical proof).",https://pubmed.ncbi.nlm.nih.gov/39848567/
+CCL17,passenger,25199679,differential_expression_biomarker,VALID,2014,"Utility of serum TARC as a biomarker for monitoring AD severity.",https://pubmed.ncbi.nlm.nih.gov/25199679/
+CCL17,passenger,36065100,differential_expression_biomarker,VALID,2022,"Serum TARC levels correlate with AD disease severity in infants.",https://pubmed.ncbi.nlm.nih.gov/36065100/
+IL31,driver,32640132,clinical_pharmacology_pathway,VALID,2020,"Nemolizumab (IL-31RA) Phase 3 AD pruritus trial.",https://pubmed.ncbi.nlm.nih.gov/32640132/
+IL31,driver,39067461,clinical_pharmacology_pathway,VALID,2024,"Nemolizumab ARCADIA 1/2 Phase 3 AD trials.",https://pubmed.ncbi.nlm.nih.gov/39067461/
+IL4,driver,27690741,clinical_pharmacology_pathway,VALID,2016,"Dupilumab Phase 3 AD trials (blocks IL-4/IL-13 via IL-4RÎ±).",https://pubmed.ncbi.nlm.nih.gov/27690741/
+IL4,driver,25006719,clinical_pharmacology_pathway,VALID,2014,"Dupilumab treatment in adults with moderate-to-severe AD.",https://pubmed.ncbi.nlm.nih.gov/25006719/
+S100A9,passenger,38108208,differential_expression_biomarker,VALID,2024,"Abrocitinib skin biomarker study (S100 family markers fall with disease improvement).",https://pubmed.ncbi.nlm.nih.gov/38108208/
+S100A9,passenger,39848567,preclinical_counterpoint,VALID,2025,"S100A8/A9 neutralizing antibody preclinical AD-like benefit.",https://pubmed.ncbi.nlm.nih.gov/39848567/

@@ -1,0 +1,16 @@
+.env
+.env.local
+.env.*.local
+.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.next/
+**/node_modules/
+**/test-results/
+**/playwright-report/
+*.pyc
+.DS_Store
+.vscode/
+.idea/
+*.pem
+.vercel/

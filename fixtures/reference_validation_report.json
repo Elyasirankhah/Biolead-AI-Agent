@@ -1,0 +1,138 @@
+﻿[
+    {
+        "pmid":  "27690741",
+        "status":  "VALID",
+        "year":  "2016",
+        "journal":  "N Engl J Med",
+        "title":  "Two Phase 3 Trials of Dupilumab versus Placebo in Atopic Dermatitis.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/27690741/"
+    },
+    {
+        "pmid":  "25006719",
+        "status":  "VALID",
+        "year":  "2014",
+        "journal":  "N Engl J Med",
+        "title":  "Dupilumab treatment in adults with moderate-to-severe atopic dermatitis.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/25006719/"
+    },
+    {
+        "pmid":  "16550169",
+        "status":  "VALID",
+        "year":  "2006",
+        "journal":  "Nat Genet",
+        "title":  "Common loss-of-function variants of the epidermal barrier protein filaggrin are a major predisposing factor for atopic dermatitis.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/16550169/"
+    },
+    {
+        "pmid":  "33000465",
+        "status":  "VALID",
+        "year":  "2021",
+        "journal":  "Br J Dermatol",
+        "title":  "Tralokinumab for moderate-to-severe atopic dermatitis: results from two 52-week, randomized, double-blind, multicentre, placebo-controlled phase III trials (ECZTRA 1 and ECZTRA 2).",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/33000465/"
+    },
+    {
+        "pmid":  "36920778",
+        "status":  "VALID",
+        "year":  "2023",
+        "journal":  "N Engl J Med",
+        "title":  "Two Phase 3 Trials of Lebrikizumab for Moderate-to-Severe Atopic Dermatitis.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/36920778/"
+    },
+    {
+        "pmid":  "37682422",
+        "status":  "VALID",
+        "year":  "2023",
+        "journal":  "Am J Clin Dermatol",
+        "title":  "Tralokinumab Efficacy Over 1 Year in Adults with Moderate-to-Severe Atopic Dermatitis: Pooled Data from Two Phase III Trials.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/37682422/"
+    },
+    {
+        "pmid":  "34023008",
+        "status":  "VALID",
+        "year":  "2021",
+        "journal":  "Lancet",
+        "title":  "Once-daily upadacitinib versus placebo in adolescents and adults with moderate-to-severe atopic dermatitis (Measure Up 1 and Measure Up 2): results from two replicate double-blind, randomised controlled phase 3 trials.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/34023008/"
+    },
+    {
+        "pmid":  "32711801",
+        "status":  "VALID",
+        "year":  "2020",
+        "journal":  "Lancet",
+        "title":  "Efficacy and safety of abrocitinib in adults and adolescents with moderate-to-severe atopic dermatitis (JADE MONO-1): a multicentre, double-blind, randomised, placebo-controlled, phase 3 trial.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/32711801/"
+    },
+    {
+        "pmid":  "35262646",
+        "status":  "VALID",
+        "year":  "2022",
+        "journal":  "JAMA Dermatol",
+        "title":  "Efficacy and Safety of Upadacitinib in Patients With Moderate to Severe Atopic Dermatitis: Analysis of Follow-up Data From the Measure Up 1 and Measure Up 2 Randomized Clinical Trials.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/35262646/"
+    },
+    {
+        "pmid":  "32640132",
+        "status":  "VALID",
+        "year":  "2020",
+        "journal":  "N Engl J Med",
+        "title":  "Trial of Nemolizumab and Topical Agents for Atopic Dermatitis with Pruritus.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/32640132/"
+    },
+    {
+        "pmid":  "39067461",
+        "status":  "VALID",
+        "year":  "2024",
+        "journal":  "Lancet",
+        "title":  "Nemolizumab with concomitant topical therapy in adolescents and adults with moderate-to-severe atopic dermatitis (ARCADIA 1 and ARCADIA 2): results from two replicate, double-blind, randomised controlled phase 3 trials.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/39067461/"
+    },
+    {
+        "pmid":  "36884218",
+        "status":  "VALID",
+        "year":  "2023",
+        "journal":  "J Exp Med",
+        "title":  "Human germline heterozygous gain-of-function STAT6 variants cause severe allergic disease.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/36884218/"
+    },
+    {
+        "pmid":  "20466416",
+        "status":  "VALID",
+        "year":  "2010",
+        "journal":  "J Allergy Clin Immunol",
+        "title":  "Genetic variants in thymic stromal lymphopoietin are associated with atopic dermatitis and eczema herpeticum.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/20466416/"
+    },
+    {
+        "pmid":  "38108208",
+        "status":  "VALID",
+        "year":  "2024",
+        "journal":  "Allergy",
+        "title":  "Effect of abrocitinib on skin biomarkers in patients with moderate-to-severe atopic dermatitis.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/38108208/"
+    },
+    {
+        "pmid":  "39848567",
+        "status":  "VALID",
+        "year":  "2025",
+        "journal":  "J Invest Dermatol",
+        "title":  "An S100A8/A9 Neutralizing Antibody Potently Ameliorates Contact Hypersensitivity and Atopic Dermatitis Symptoms.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/39848567/"
+    },
+    {
+        "pmid":  "25199679",
+        "status":  "VALID",
+        "year":  "2014",
+        "journal":  "J Am Acad Dermatol",
+        "title":  "Utility of serum thymus and activation-regulated chemokine as a biomarker for monitoring of atopic dermatitis severity.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/25199679/"
+    },
+    {
+        "pmid":  "36065100",
+        "status":  "VALID",
+        "year":  "2022",
+        "journal":  "Allergy Asthma Proc",
+        "title":  "Serum thymus and activation-regulated chemokine (TARC) levels correlate with atopic dermatitis disease severity in patients \u003c 6 months.",
+        "pubmed_url":  "https://pubmed.ncbi.nlm.nih.gov/36065100/"
+    }
+]
