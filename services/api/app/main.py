@@ -12,7 +12,16 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
-load_dotenv(Path(__file__).resolve().parents[3] / ".env")
+for _env_path in (
+    Path(__file__).resolve().parents[3] / ".env",
+    Path(__file__).resolve().parents[2] / ".env",
+    Path.cwd() / ".env",
+):
+    if _env_path.is_file():
+        load_dotenv(_env_path)
+        break
+else:
+    load_dotenv()
 
 from .adapters import collect_live_evidence
 from .auth import AuthUser, OptionalUser, auth_configured
