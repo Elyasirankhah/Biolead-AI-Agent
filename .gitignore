@@ -14,3 +14,5 @@
 .idea/
 *.pem
 .vercel/
+*.pptx
+scripts/

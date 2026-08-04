@@ -164,11 +164,35 @@ Full design: [`docs/reasoning-rubric.md`](docs/reasoning-rubric.md).
 
 ---
 
-## Architecture
+## System workflow
 
-Local: Next.js (`:3000`) → FastAPI (`:8000`) → public evidence APIs + optional MongoDB / LLM.
+End-to-end path of a BioLead analysis in the current deployment:
 
-Production-oriented notes (AWS ECS/ALB sketch): [`docs/aws-architecture.md`](docs/aws-architecture.md), [`infra/`](infra/).
+<p align="center">
+  <img src="docs/images/workflow.png" alt="BioLead system workflow: request, collect, normalize, score, ensemble, persist, respond" width="100%" />
+</p>
+
+| Stage | What happens |
+| --- | --- |
+| **Request** | Scientist submits disease, gene(s), tissue, and Demo/Live mode in the Next.js workbench (Vercel). |
+| **Collect** | FastAPI pulls Demo fixtures or Live evidence from Open Targets, Europe PMC, and GWAS Catalog. |
+| **Normalize → Score** | Evidence is deduplicated and scored by the deterministic causal rubric. |
+| **Ensemble** | Optional advocate ∥ falsifier LLM votes (grounded to evidence IDs) merge with the rubric. |
+| **Persist / Respond** | Runs may be stored in MongoDB Atlas; the UI returns the dossier (verdict, causal chain, evidence). |
+
+Hosts today: **Vercel** (UI) · **Render** (API) · **MongoDB Atlas** (optional) · **OpenAI-compatible LLM** (optional).
+
+---
+
+## Target AWS architecture
+
+How the same system maps to a production AWS footprint (ALB / ECS / Step Functions / Aurora / Redis / Bedrock). This is the scale-out design; the running prototype is the workflow above.
+
+<p align="center">
+  <img src="docs/images/aws-architecture.png" alt="BioLead target AWS architecture" width="100%" />
+</p>
+
+Notes: [`docs/aws-architecture.md`](docs/aws-architecture.md) · [`infra/`](infra/).
 
 ---
 
