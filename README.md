@@ -184,4 +184,6 @@ Full design: [`docs/reasoning-rubric.md`](docs/reasoning-rubric.md).
 
 ## License / use
 
-Research prototype. Public scientific APIs remain under their own terms. Not for clinical use.
+MIT License — see [`LICENSE`](LICENSE).
+
+Research prototype. Public scientific APIs (Open Targets, Europe PMC, GWAS Catalog) remain under their own terms. BioLead is **not** clinical decision support and makes no warranty of scientific or medical fitness for any purpose.
