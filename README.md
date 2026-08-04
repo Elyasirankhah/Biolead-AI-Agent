@@ -4,6 +4,14 @@ BioLead is a scientific reasoning workbench that separates **driver (carrier)** 
 
 **Research use only** — not clinical decision support.
 
+## Try it online
+
+Live demo: https://biolead-ai-agent-eight.vercel.app
+
+Use **Demo** mode for the seeded IL4R / S100A8 / FLG comparison. The first request after idle may take ~30–60s while the free API host wakes up.
+
+**LLM / ensemble (optional):** The deterministic rubric always runs. To enable GPT-based advocate + falsifier votes, set `LLM_API_KEY` (and optionally `LLM_MODEL`, e.g. `gpt-5-mini`) on the API host and set `ENSEMBLE_REQUIRED=true`. Without a key, the workbench still works; ensemble LLM voters are simply unavailable.
+
 ---
 
 ## Key pieces
