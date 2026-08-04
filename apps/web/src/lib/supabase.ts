@@ -20,7 +20,7 @@ export function getSupabase(): SupabaseClient | null {
   return client;
 }
 
-export async function getAccessToken(): Promise<string | None> {
+export async function getAccessToken(): Promise<string | null> {
   const sb = getSupabase();
   if (!sb) return null;
   const { data } = await sb.auth.getSession();
