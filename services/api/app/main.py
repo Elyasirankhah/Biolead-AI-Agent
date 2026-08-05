@@ -39,8 +39,17 @@ DEFAULT_ORIGINS = [
 
 def _cors_origins() -> list[str]:
     configured = os.getenv("CORS_ORIGINS", "")
-    extras = [origin.strip() for origin in configured.split(",") if origin.strip()]
+    extras = [origin.strip() for origin in configured.split(",") if origin.strip() and origin.strip() != "*"]
     return DEFAULT_ORIGINS + extras
+
+
+def _cors_origin_regex() -> str | None:
+    """Allow Vercel preview/production aliases and optional wildcard CORS_ORIGINS=*."""
+    configured = os.getenv("CORS_ORIGINS", "")
+    parts = [origin.strip() for origin in configured.split(",") if origin.strip()]
+    if "*" in parts:
+        return r"https?://.*"
+    return r"https://[a-zA-Z0-9-]+\.vercel\.app"
 
 
 @asynccontextmanager
@@ -63,7 +72,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_cors_origins(),
-    allow_origin_regex=r"https://[a-zA-Z0-9-]+\.vercel\.app",
+    allow_origin_regex=_cors_origin_regex(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
