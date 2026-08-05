@@ -391,9 +391,14 @@ export default function Home() {
   async function run(e: FormEvent) {
     e.preventDefault();
     const started = performance.now();
+    let completed = false;
     setRunning(true);
     setLastLatencyMs(null);
     setNotice("Collecting and scoring evidence\u2026");
+    if (mode === "live") {
+      setResults([]);
+      setActiveGene("");
+    }
     try {
       const token = await getAccessToken();
       const headers: Record<string, string> = { "Content-Type": "application/json" };
@@ -412,23 +417,37 @@ export default function Home() {
           }),
         },
       );
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const detail = await res.text();
+        throw new Error(`API ${res.status}: ${detail.slice(0, 160)}`);
+      }
       const data = await res.json();
+      if (!Array.isArray(data.results) || data.results.length === 0) {
+        throw new Error("API returned no candidate results");
+      }
       setResults(data.results);
       setActiveGene(data.results[0]?.gene ?? "");
+      completed = true;
       const ms = Math.round(performance.now() - started);
       setLastLatencyMs(ms);
       const who = session?.user?.email ? ` · ${session.user.email}` : "";
       setNotice(`${mode === "live" ? "Live" : "Seeded"} run \u00b7 ${data.run_id.slice(0, 8)} · ${(ms / 1000).toFixed(1)}s${who}`);
-    } catch {
+    } catch (error) {
       const ms = Math.round(performance.now() - started);
       setLastLatencyMs(ms);
-      setResults(demo);
-      setActiveGene("IL4R");
-      setNotice(`Backend unavailable \u2014 offline demo · ${(ms / 1000).toFixed(1)}s`);
+      if (mode === "demo") {
+        setResults(demo);
+        setActiveGene("IL4R");
+        setNotice(`Backend unavailable — showing offline Demo fixtures · ${(ms / 1000).toFixed(1)}s`);
+      } else {
+        setResults([]);
+        setActiveGene("");
+        const message = error instanceof Error ? error.message : "Unknown request error";
+        setNotice(`Live analysis failed — ${message} · ${(ms / 1000).toFixed(1)}s`);
+      }
     } finally {
       setRunning(false);
-      setStage(STAGES.length);
+      setStage(completed || mode === "demo" ? STAGES.length : 0);
     }
   }
 
@@ -588,6 +607,11 @@ export default function Home() {
               </button>
             );
           })}
+          {!running && results.length === 0 && (
+            <div className="empty-results" role="status">
+              No live result is available. Check the message above and retry.
+            </div>
+          )}
         </div>
       </section>
 
