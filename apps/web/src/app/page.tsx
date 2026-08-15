@@ -1049,22 +1049,26 @@ function Clara({
     setLoading(true);
     try {
       const token = await getAccessToken();
-      const headers: Record<string, string> = { "Content-Type": "application/json" };
-      if (token) headers.Authorization = `Bearer ${token}`;
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"}/api/chat`,
-        {
+      const payload = JSON.stringify({
+        run_id: runId,
+        chat_id: chatId,
+        messages: chatPayload(next.filter((m) => m.role !== "command" || Boolean(confirm?.length))),
+        context,
+        confirm: confirm ?? [],
+      });
+      const postChat = (auth: string | null) => {
+        const headers: Record<string, string> = { "Content-Type": "application/json" };
+        if (auth) headers.Authorization = `Bearer ${auth}`;
+        return fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"}/api/chat`, {
           method: "POST",
           headers,
-          body: JSON.stringify({
-            run_id: runId,
-            chat_id: chatId,
-            messages: chatPayload(next.filter((m) => m.role !== "command" || Boolean(confirm?.length))),
-            context,
-            confirm: confirm ?? [],
-          }),
-        },
-      );
+          body: payload,
+        });
+      };
+      let res = await postChat(token);
+      if (!res.ok && token && (res.status === 401 || res.status === 503)) {
+        res = await postChat(null);
+      }
       if (!res.ok) throw new Error(`${res.status}`);
       const data = await res.json();
       const activity: string[] = Array.isArray(data.activity) ? data.activity : [];

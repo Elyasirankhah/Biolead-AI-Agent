@@ -9,6 +9,8 @@ import jwt
 from fastapi import Depends, Header, HTTPException
 from jwt import PyJWKClient
 
+_DEFAULT_SUPABASE_URL = "https://ydtjohrtpesfypyhggge.supabase.co"
+
 
 @dataclass
 class AuthUser:
@@ -16,11 +18,16 @@ class AuthUser:
     email: str | None = None
 
 
+def _env(*names: str) -> str:
+    for name in names:
+        value = os.getenv(name, "").strip()
+        if value:
+            return value
+    return ""
+
+
 def _supabase_url() -> str:
-    return (
-        os.getenv("SUPABASE_URL", "").strip()
-        or os.getenv("NEXT_PUBLIC_SUPABASE_URL", "").strip()
-    )
+    return _env("SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_URL") or _DEFAULT_SUPABASE_URL
 
 
 def _jwks_url() -> str:
@@ -75,9 +82,6 @@ def _decode_with_jwks(token: str, jwks_url: str) -> AuthUser:
 def _decode_token(token: str) -> AuthUser:
     secret = os.getenv("SUPABASE_JWT_SECRET", "").strip()
     jwks = _jwks_url()
-    if not secret and not jwks:
-        raise HTTPException(status_code=503, detail="Supabase auth is not configured")
-
     errors: list[str] = []
     if jwks:
         try:
@@ -89,6 +93,8 @@ def _decode_token(token: str) -> AuthUser:
             return _decode_with_secret(token, secret)
         except Exception as exc:  # noqa: BLE001
             errors.append(f"secret: {exc}")
+    if not secret and not jwks:
+        raise HTTPException(status_code=503, detail="Supabase auth is not configured")
     detail = "; ".join(errors) if errors else "Unable to verify token"
     raise HTTPException(status_code=401, detail=f"Invalid auth token: {detail}")
 
@@ -104,7 +110,13 @@ async def get_optional_user(
     scheme, _, token = authorization.partition(" ")
     if scheme.lower() != "bearer" or not token:
         raise HTTPException(status_code=401, detail="Expected Bearer token")
-    return _decode_token(token)
+    try:
+        return _decode_token(token)
+    except HTTPException as exc:
+        # A signed-in workbench must still reach Clara if Render has no Supabase env.
+        if exc.status_code == 503 and not auth_required():
+            return None
+        raise
 
 
 OptionalUser = Annotated[AuthUser | None, Depends(get_optional_user)]
