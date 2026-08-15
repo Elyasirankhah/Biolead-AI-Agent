@@ -4,7 +4,6 @@ BioLead is a causal gene-prioritization product for dermatology. It separates **
 
 **Live demo:** https://biolead-ai-agent-eight.vercel.app
 
-Hosts: **Vercel** (workbench) · **Render** (API · https://biolead-ai-agent.onrender.com) · **Supabase** (sign-in)
 
 Research use only — not clinical decision support.
 
