@@ -34,6 +34,18 @@ async def connect_mongo() -> None:
     await _db.runs.create_index([("created_at", -1)])
     await _db.runs.create_index("disease")
     await _db.runs.create_index("user_id")
+    await _db.feedback.create_index("feedback_id", unique=True)
+    await _db.feedback.create_index([("disease_norm", 1), ("gene", 1), ("evidence_id", 1), ("created_at", -1)])
+    try:
+        await _db.chat_sessions.drop_index("user_id_1_run_id_1")
+    except Exception:
+        pass
+    await _db.chat_sessions.create_index(
+        [("user_id", 1), ("chat_id", 1)],
+        unique=True,
+        partialFilterExpression={"chat_id": {"$type": "string"}},
+    )
+    await _db.chat_sessions.create_index([("user_id", 1), ("updated_at", -1)])
 
 
 async def close_mongo() -> None:

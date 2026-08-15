@@ -11,8 +11,8 @@ db.meta.update_one(
     {
         "$set": {
             "name": "BioLead Evidence Workbench",
-            "purpose": "Stores analysis runs for local demo",
-            "created_for": "biolead",
+            "purpose": "Stores analysis runs for local demo / screen share",
+            "created_for": "Oddity take-home demo",
         }
     },
     upsert=True,

@@ -1,0 +1,128 @@
+{
+  "corpus": "demo_golden_v1",
+  "disease": "Atopic dermatitis",
+  "rules_version": "score:1.1.0|prov:1.0.0|falsify:1.0.0|ensemble:1.0.0",
+  "cases": {
+    "IL4R": {
+      "gene": "IL4R",
+      "expected_verdict": "Driver",
+      "verdict": "Driver",
+      "confidence": 92,
+      "direction": "inhibit",
+      "accepted": 7,
+      "rejected": 0,
+      "falsification_status": "PASSED",
+      "hard_unresolved": 0,
+      "contradicting": 0,
+      "snapshot_id": "BL-IL4R-AtopicDerm-0ac22b62a703",
+      "content_hash": "0ac22b62a7030ce6d1184d77f835f90e4322b4ac59fe644f82eb36bd78cad7e0",
+      "independent_pillars": 6,
+      "verdict_match": true
+    },
+    "FLG": {
+      "gene": "FLG",
+      "expected_verdict": "Insufficient evidence",
+      "verdict": "Insufficient evidence",
+      "confidence": 55,
+      "direction": "activate",
+      "accepted": 4,
+      "rejected": 0,
+      "falsification_status": "UNRESOLVED",
+      "hard_unresolved": 1,
+      "contradicting": 1,
+      "snapshot_id": "BL-FLG-AtopicDerm-251456b29a22",
+      "content_hash": "251456b29a22326affad5313287ae9afbadcd6188921769acf9deec6158cddb9",
+      "independent_pillars": 2,
+      "verdict_match": true
+    },
+    "S100A8": {
+      "gene": "S100A8",
+      "expected_verdict": "Passenger",
+      "verdict": "Passenger",
+      "confidence": 24,
+      "direction": "unresolved",
+      "accepted": 4,
+      "rejected": 0,
+      "falsification_status": "PASSED",
+      "hard_unresolved": 0,
+      "contradicting": 2,
+      "snapshot_id": "BL-S100A8-AtopicDerm-441ed42f124b",
+      "content_hash": "441ed42f124b0760911228ee333e3e1f061eb82c63ffd81a73a1bb61f344da5d",
+      "independent_pillars": 0,
+      "verdict_match": true
+    }
+  },
+  "metrics": [
+    {
+      "name": "provenance_coverage",
+      "value": 1.0,
+      "pass": true,
+      "detail": "15 accepted / 0 rejected; untrusted-accepted=0",
+      "acceptance": "100% of qualifying (accepted) demo evidence has valid provenance"
+    },
+    {
+      "name": "grounded_decision_coverage",
+      "value": true,
+      "pass": true,
+      "detail": "IL4R Driver with 7 accepted items; falsify=PASSED",
+      "acceptance": "100% of verdict-driving claims have qualifying provenance"
+    },
+    {
+      "name": "verdict_determinism",
+      "value": true,
+      "pass": true,
+      "detail": "hash_a=0ac22b62a703 hash_b=0ac22b62a703",
+      "acceptance": "100% identical on repeated runs against identical snapshot"
+    },
+    {
+      "name": "known_contradiction_recall",
+      "value": 1.0,
+      "pass": true,
+      "detail": "S100A8 counters=2; contextual=True; hard=True",
+      "acceptance": "100% on curated golden contradiction set"
+    },
+    {
+      "name": "polarity_accuracy",
+      "value": 1.0,
+      "pass": true,
+      "detail": "IL4R=Driver; FLG=Insufficient evidence; S100A8=Passenger",
+      "acceptance": "100% on manually reviewed demo evidence (Driver/Passenger/Abstain)"
+    },
+    {
+      "name": "entity_grounding",
+      "value": 1.0,
+      "pass": true,
+      "detail": "all demo items gene-grounded",
+      "acceptance": "100% on demo corpus"
+    },
+    {
+      "name": "duplicate_study_inflation",
+      "value": 0,
+      "pass": true,
+      "detail": "no duplicate independent_key within a gene fixture",
+      "acceptance": "0 known duplicate studies counted as independent evidence"
+    },
+    {
+      "name": "abstention_test",
+      "value": 1.0,
+      "pass": true,
+      "detail": "FLG=Insufficient evidence; empty=Insufficient evidence",
+      "acceptance": "100% of deliberately unsupported demo cases abstain"
+    },
+    {
+      "name": "citation_link_integrity",
+      "value": 0,
+      "pass": true,
+      "detail": "all core-demo links are valid, non-placeholder HTTP(S) URLs",
+      "acceptance": "0 malformed or placeholder citation links in core demo"
+    },
+    {
+      "name": "core_demo_network_dependency",
+      "value": 0,
+      "pass": true,
+      "detail": "Demo corpus is fixture-backed; presentation path needs no live APIs",
+      "acceptance": "0 core-demo network dependency"
+    }
+  ],
+  "all_passed": true
+}

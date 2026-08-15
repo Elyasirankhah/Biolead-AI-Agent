@@ -6,16 +6,24 @@ import { getSupabase, supabaseConfigured } from "../lib/supabase";
 
 type AuthBarProps = {
   onSessionChange?: (session: Session | null) => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 };
 
-export function AuthBar({ onSessionChange }: AuthBarProps) {
+export function AuthBar({ onSessionChange, open: controlledOpen, onOpenChange }: AuthBarProps) {
   const [user, setUser] = useState<User | null>(null);
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const open = controlledOpen ?? internalOpen;
+
+  function setOpen(next: boolean) {
+    onOpenChange?.(next);
+    if (controlledOpen === undefined) setInternalOpen(next);
+  }
 
   useEffect(() => {
     const sb = getSupabase();
@@ -87,7 +95,7 @@ export function AuthBar({ onSessionChange }: AuthBarProps) {
         type="button"
         className="btn-ghost"
         data-testid="auth-open"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => setOpen(!open)}
       >
         Sign in
       </button>
@@ -126,7 +134,7 @@ export function AuthBar({ onSessionChange }: AuthBarProps) {
           <button type="submit" className="btn-ghost auth-submit" disabled={busy}>
             {busy ? "Working\u2026" : mode === "signup" ? "Create account" : "Sign in"}
           </button>
-          <p className="auth-hint">Guest mode still works without signing in.</p>
+          <p className="auth-hint">The workbench works as a guest. Clara unlocks after sign-in so chats can be saved to your account.</p>
         </form>
       )}
     </div>

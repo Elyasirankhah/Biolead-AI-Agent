@@ -1,12 +1,12 @@
 # BioLead architecture diagram (Excalidraw-style)
 
-Copy into Excalidraw as boxes/arrows, or replace with your own AWS flowchart.
+Copy into Excalidraw as boxes/arrows.
 
 ```
 [Scientist]
     |
     v
-[Next.js Workbench]
+[Vercel · Next.js Workbench]
   - query form
   - pipeline timeline
   - decision brief / comparison
@@ -21,6 +21,7 @@ Copy into Excalidraw as boxes/arrows, or replace with your own AWS flowchart.
   - /api/analyze
   - /api/demo
   - /api/analyze/stream
+  - CORS_ORIGINS = Vercel URL
     |
     +--> [Step Functions] --> [ECS Evidence Workers]
                                 |-- Open Targets

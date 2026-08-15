@@ -11,4 +11,4 @@ Use this as the talk track / deck skeleton for a BioLead walkthrough.
 7. **Demo comparison** — IL4R (Driver) vs S100A8 (Passenger) vs FLG (Insufficient)
 8. **Architecture** — Next.js workbench · FastAPI on AWS · deterministic scorer, LLM only for grounded narrative votes
 9. **Scale-out** — ALB/ECS, Step Functions, Aurora, S3 provenance, Bedrock, ElastiCache
-10. **Limitations & next steps** — Public-data bias, tissue coverage, L2G depth, clinician-facing guardrails
+10. **Roadmap** — Deeper tissue coverage, L2G resolution, and clinician-facing workflows

@@ -31,7 +31,33 @@ def test_s100a8_is_passenger_like_with_counterevidence():
     assert scorecard.causality.value < 32
 
 
-def test_missing_evidence_abstains():
+def test_il13_close_pair_is_driver_with_clinical_rescue():
+    scorecard, verdict, confidence = score_evidence(
+        get_demo_evidence("Atopic dermatitis", "IL13")
+    )
+    assert verdict == "Driver"
+    assert scorecard.independent_pillars >= 3
+    assert confidence >= 70
+
+
+def test_s100a9_close_pair_is_passenger_like():
+    scorecard, verdict, _ = score_evidence(
+        get_demo_evidence("Atopic dermatitis", "S100A9")
+    )
+    assert verdict == "Passenger"
+    assert scorecard.contradiction_penalty > 0
+
+
+def test_psoriasis_tyk2_is_driver():
+    _, verdict, _ = score_evidence(get_demo_evidence("Psoriasis", "TYK2"))
+    assert verdict == "Driver"
+
+
+def test_psoriasis_stat3_abstains_without_clinical_rescue():
+    scorecard, verdict, _ = score_evidence(get_demo_evidence("Psoriasis", "STAT3"))
+    assert verdict == "Insufficient evidence"
+    assert scorecard.evidence_count >= 3
+    assert any(item.stance == "contradicts" for item in get_demo_evidence("Psoriasis", "STAT3"))
     scorecard, verdict, confidence = score_evidence([])
     assert verdict == "Insufficient evidence"
     assert scorecard.evidence_quality.value == 0

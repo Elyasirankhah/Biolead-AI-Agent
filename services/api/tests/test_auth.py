@@ -5,7 +5,7 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 
-def _token(sub: str = "user-123", email: str = "sci@example.test") -> str:
+def _token(sub: str = "user-123", email: str = "sci@oddity.test") -> str:
     return jwt.encode(
         {"sub": sub, "email": email, "aud": "authenticated", "role": "authenticated"},
         "test-secret-for-biolead-auth-32b!",

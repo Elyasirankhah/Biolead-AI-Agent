@@ -11,6 +11,16 @@ services:
       timeout: 5s
       retries: 5
 
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   api:
     build: ./services/api
     ports:
@@ -22,8 +32,12 @@ services:
       LLM_MODEL: ${LLM_MODEL:-gpt-5-mini}
       MONGODB_URI: mongodb://mongo:27017
       MONGODB_DB: biolead
+      REDIS_URL: redis://redis:6379/0
+      CACHE_TTL_HOURS: "24"
     depends_on:
       mongo:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]

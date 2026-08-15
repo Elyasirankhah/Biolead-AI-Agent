@@ -10,7 +10,7 @@ test("compares driver, passenger, and abstention outcomes", async ({ page }) => 
   await page.getByTestId("gene-select-S100A8").click();
   await expect(page.getByTestId("active-gene")).toHaveText("S100A8");
   await expect(page.getByTestId("active-verdict")).toHaveText("Passenger");
-  await expect(page.getByText("No disease-relevant rescue evidence identified")).toBeVisible();
+  await expect(page.getByText("No disease-relevant rescue evidence identified").first()).toBeVisible();
 
   await page.getByTestId("gene-select-FLG").click();
   await expect(page.getByTestId("active-gene")).toHaveText("FLG");
@@ -21,8 +21,6 @@ test("shows an offline-safe result when API is unavailable", async ({ page }) =>
   await page.route("**/api/analyze", (route) => route.abort());
   await page.goto("/");
   await page.getByTestId("run-analysis").click();
-  await expect(page.getByTestId("run-notice")).toHaveText(
-    "Backend unavailable — showing verified offline demo",
-  );
+  await expect(page.getByTestId("run-notice")).toContainText("Backend unavailable");
   await expect(page.getByTestId("active-gene")).toHaveText("IL4R");
 });

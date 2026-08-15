@@ -11,7 +11,12 @@ from uuid import uuid4
 import httpx
 
 from .ensemble import adjust_confidence, merge_ensemble_votes, normalize_vote
+from .falsification import run_falsification
+from .feedback import apply_scientist_feedback
+from .feedback_models import FeedbackRecord
+from .ledger import build_decision_ledger
 from .models import AgentVoteTrace, AnalysisResult, EnsembleTrace, EvidenceItem, EvidenceType
+from .provenance import apply_provenance_gate
 from .scoring import CAUSAL_CATEGORIES, score_evidence
 
 PROMPTS_DIR = Path(__file__).resolve().parent.parent / "prompts"
@@ -64,6 +69,30 @@ class OpenAICompatibleProvider:
             response.raise_for_status()
             content = response.json()["choices"][0]["message"]["content"]
             return json.loads(content)
+
+    async def chat(self, messages: list[dict[str, str]]) -> str:
+        """Plain-text chat (Clara). Uses the same LLM_API_KEY / LLM_MODEL as ensemble voters."""
+        if not self.api_key:
+            raise RuntimeError("LLM_API_KEY is not configured")
+        body: dict = {
+            "model": self.model,
+            "messages": messages,
+        }
+        if self.model.startswith(("gpt-5", "o1", "o3", "o4")):
+            body["max_completion_tokens"] = 800
+        else:
+            body["temperature"] = 0.3
+            body["max_tokens"] = 500
+
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                f"{self.base_url.rstrip('/')}/chat/completions",
+                headers={"Authorization": f"Bearer {self.api_key}"},
+                json=body,
+                timeout=60,
+            )
+            response.raise_for_status()
+            return (response.json()["choices"][0]["message"]["content"] or "").strip()
 
     async def synthesize(self, payload: dict) -> dict | None:
         prompt = (
@@ -308,22 +337,33 @@ async def build_result(
     provider: NarrativeProvider | None = None,
     run_id: str | None = None,
     source_errors: list[str] | None = None,
+    mode: str | None = None,
+    feedbacks: list[FeedbackRecord] | None = None,
 ) -> AnalysisResult:
-    scorecard, det_verdict, confidence = score_evidence(items)
+    accepted, rejected = apply_provenance_gate(items)
+    feedback_kept, feedback_removed, feedback_summary = apply_scientist_feedback(
+        accepted, feedbacks or []
+    )
+    accepted = feedback_kept
+    rejected = rejected + feedback_removed
+    scorecard, det_verdict, confidence = score_evidence(accepted)
     advocate_vote = None
     falsifier_vote = None
     advocate_detail = None
     falsifier_detail = None
-    narrative = _default_narrative(gene, disease, det_verdict, items)
-    require_llm = os.getenv("ENSEMBLE_REQUIRED", "true").strip().lower() in {
+    narrative = _default_narrative(gene, disease, det_verdict, accepted)
+    is_demo = (mode or "").strip().lower() == "demo"
+    require_llm = not is_demo and os.getenv("ENSEMBLE_REQUIRED", "true").strip().lower() in {
         "1",
         "true",
         "yes",
     }
 
-    llm_ready = bool(provider and getattr(provider, "enabled", False))
+    # Demo is the frozen, reproducible presentation path. Do not let optional
+    # model votes or generated prose change its verdict, snapshot, or wording.
+    llm_ready = bool(not is_demo and provider and getattr(provider, "enabled", False))
     if llm_ready:
-        payload = _evidence_payload(gene, disease, scorecard, items, det_verdict)
+        payload = _evidence_payload(gene, disease, scorecard, accepted, det_verdict)
         advocate_raw, falsifier_raw = await asyncio.gather(
             provider.vote("advocate", payload),
             provider.vote("falsifier", payload),
@@ -331,17 +371,17 @@ async def build_result(
         )
         if isinstance(advocate_raw, dict):
             advocate_detail = _ground_vote_trace(
-                advocate_raw, "advocate", items, scorecard
+                advocate_raw, "advocate", accepted, scorecard
             )
             advocate_vote = advocate_detail.vote if advocate_detail else None
-            grounded = _ground_generated_narrative(advocate_raw, items, narrative)
+            grounded = _ground_generated_narrative(advocate_raw, accepted, narrative)
             narrative = {**narrative, **{k: grounded[k] for k in grounded if grounded[k]}}
         if isinstance(falsifier_raw, dict):
             falsifier_detail = _ground_vote_trace(
-                falsifier_raw, "falsifier", items, scorecard
+                falsifier_raw, "falsifier", accepted, scorecard
             )
             falsifier_vote = falsifier_detail.vote if falsifier_detail else None
-            grounded_f = _ground_generated_narrative(falsifier_raw, items, narrative)
+            grounded_f = _ground_generated_narrative(falsifier_raw, accepted, narrative)
             if grounded_f["passenger_case"] and grounded_f["passenger_case"] != narrative.get("passenger_case"):
                 narrative["passenger_case"] = grounded_f["passenger_case"]
             if grounded_f.get("next_experiments"):
@@ -357,13 +397,32 @@ async def build_result(
     )
     confidence = adjust_confidence(confidence, verdict, trace)
 
+    direction = _recommended_direction(accepted)
+    falsification = run_falsification(
+        gene=gene.upper(),
+        disease=disease,
+        direction=direction,
+        items=accepted,
+        ensemble_policy=str(trace.get("policy")),
+    )
+    # Mandatory gate: unresolved hard conflicts cannot remain high-confidence Driver.
+    if verdict == "Driver" and falsification.blocks_driver:
+        verdict = "Insufficient evidence"
+        confidence = min(confidence, 69)
+        trace = {**trace, "policy": f"{trace.get('policy')}+falsification_hard_conflict_block"}
+        limitations_note = (
+            "Falsification gate blocked Driver: unresolved hard contradiction(s) remain."
+        )
+    else:
+        limitations_note = None
+
     # Refresh default summary if verdict changed from deterministic-only narrative.
     if verdict != det_verdict and (
         not narrative.get("executive_summary")
         or "classified" in narrative["executive_summary"]
         or "abstains" in narrative["executive_summary"]
     ):
-        refreshed = _default_narrative(gene, disease, verdict, items)
+        refreshed = _default_narrative(gene, disease, verdict, accepted)
         narrative["executive_summary"] = refreshed["executive_summary"]
 
     if advocate_vote and falsifier_vote and advocate_vote != falsifier_vote:
@@ -372,17 +431,51 @@ async def build_result(
             f"falsifier voted {falsifier_vote}; final policy={trace['policy']}."
         )[:700]
 
+    if is_demo:
+        ensemble_limitation = (
+            "Demo mode uses the frozen deterministic decision path; LLM voters are intentionally skipped."
+        )
+    elif advocate_vote is not None and falsifier_vote is not None:
+        ensemble_limitation = (
+            "Final verdict uses the hybrid ensemble: deterministic rubric + LLM advocate + LLM falsifier."
+        )
+    elif require_llm:
+        ensemble_limitation = (
+            "Hybrid ensemble was required, but unavailable voters forced an abstention-safe verdict."
+        )
+    else:
+        ensemble_limitation = (
+            "Final verdict uses the deterministic rubric because both LLM voters were not available."
+        )
     limitations = [
         "Research-use-only prioritization; not clinical or experimental validation.",
         "Public sources differ in recency, ancestry, tissue coverage, and publication bias.",
         "A missing result is not proof that no evidence exists.",
-        "Final verdict uses required hybrid ensemble: deterministic rubric + LLM advocate + LLM falsifier.",
+        ensemble_limitation,
+        "Only provenance-accepted evidence can influence the verdict (fail closed).",
+        "Falsification is mandatory: BioLead will not issue a causal verdict without attempting disproof.",
+        "Decision snapshots are versioned: identical normalized evidence + rules produce the same content hash.",
     ]
+    if limitations_note:
+        limitations.append(limitations_note)
     if source_errors:
         limitations.append("Unavailable live sources: " + ", ".join(source_errors))
-    if not items:
-        limitations.append("No normalized evidence items were available for this query.")
-    if advocate_vote is None or falsifier_vote is None:
+    if rejected:
+        limitations.append(
+            f"Provenance gate rejected {len(rejected)} evidence item(s): "
+            + ", ".join(f"{item.id} ({item.provenance_reason})" for item in rejected[:4])
+        )
+    if feedback_summary.applied:
+        limitations.append(
+            f"Scientist feedback applied to {feedback_summary.applied} evidence item(s) "
+            f"(irrelevant={feedback_summary.irrelevant}, wrong_direction={feedback_summary.wrong_direction}, "
+            f"important={feedback_summary.important})."
+        )
+    if not accepted:
+        limitations.append("No provenance-accepted evidence items were available for this query.")
+    if is_demo:
+        pass
+    elif advocate_vote is None or falsifier_vote is None:
         if require_llm:
             limitations.append(
                 "Ensemble voters unavailable; ENSEMBLE_REQUIRED forced abstention to Insufficient evidence."
@@ -390,17 +483,36 @@ async def build_result(
         else:
             limitations.append("LLM voters unavailable; deterministic rubric only.")
 
+    result_run_id = run_id or str(uuid4())
+    ledger = build_decision_ledger(
+        gene=gene.upper(),
+        disease=disease,
+        tissue=tissue,
+        verdict=verdict,
+        direction=direction,
+        items=accepted,
+        scorecard=scorecard,
+        ensemble_policy=str(trace.get("policy")),
+        rejected_items=rejected,
+        mode=mode,
+    )
+
+    # Keep rejected items visible for audit, after accepted ones.
+    display_evidence = accepted + rejected
+
     return AnalysisResult(
-        run_id=run_id or str(uuid4()),
+        run_id=result_run_id,
         gene=gene.upper(),
         disease=disease,
         tissue=tissue,
         verdict=verdict,
         confidence=confidence,
-        recommended_direction=_recommended_direction(items),
+        recommended_direction=direction,
         scorecard=scorecard,
-        evidence=items,
+        evidence=display_evidence,
         limitations=limitations,
+        decision_ledger=ledger,
+        feedback_summary=feedback_summary if feedback_summary.applied else None,
         ensemble=EnsembleTrace(
             deterministic=det_verdict,
             advocate=advocate_vote,

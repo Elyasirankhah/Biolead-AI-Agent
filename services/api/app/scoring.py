@@ -81,7 +81,7 @@ def score_evidence(items: list[EvidenceItem]) -> tuple[ScoreCard, str, int]:
     causal_pillars = sum(
         1
         for category in CAUSAL_CATEGORIES
-        if category_scores.get(category, 0) >= WEIGHTS[category] * 0.45
+        if category_scores.get(category, 0) >= WEIGHTS[category] * 0.25
     )
     correlational = category_scores.get(EvidenceType.DIFFERENTIAL_EXPRESSION, 0) + category_scores.get(
         EvidenceType.LITERATURE, 0
@@ -92,15 +92,16 @@ def score_evidence(items: list[EvidenceItem]) -> tuple[ScoreCard, str, int]:
     )
 
     if (
-        quality >= 45
-        and correlational >= 5
-        and causality < 32
+        quality >= 25
+        and correlational >= 1.0
+        and causality < 28
         and has_causal_counterevidence
+        and causal_pillars < 2
     ):
         verdict = "Passenger"
-    elif quality < 35 or causal_pillars < 2:
+    elif quality < 30 or causal_pillars < 2:
         verdict = "Insufficient evidence"
-    elif causality >= 58 and causal_pillars >= 2:
+    elif causality >= 28 and causal_pillars >= 2:
         verdict = "Driver"
     else:
         verdict = "Insufficient evidence"

@@ -1,3 +1,9 @@
+"""Minimal AWS CDK sketch for the BioLead API (documentation / starting point).
+
+This is not wired into a full CDK app. It shows the intended ECS/ALB shape
+that pairs with a Vercel-hosted Next.js frontend.
+"""
+
 from aws_cdk import CfnOutput, Duration, Stack
 from aws_cdk import aws_ec2 as ec2
 from aws_cdk import aws_ecs as ecs
@@ -25,7 +31,7 @@ class BioLeadApiStack(Stack):
                 image=ecs.ContainerImage.from_asset("../services/api"),
                 container_port=8000,
                 environment={
-                    "CORS_ORIGINS": "http://localhost:3000",
+                    "CORS_ORIGINS": "https://your-app.vercel.app",
                 },
             ),
             health_check_grace_period=Duration.seconds(60),
@@ -36,6 +42,6 @@ class BioLeadApiStack(Stack):
         CfnOutput(self, "ApiUrl", value=service.load_balancer.load_balancer_dns_name)
         CfnOutput(
             self,
-            "WorkbenchEnvHint",
+            "VercelEnvHint",
             value="Set NEXT_PUBLIC_API_URL to https://<ApiUrl>",
         )

@@ -1,0 +1,2879 @@
+{
+  "dataset": "BioLead Dermatology Reference Standard v1",
+  "reference_version": "1.1.0",
+  "scope": "dermatology_only",
+  "created_at": "2026-08-12T17:08:00.798277+00:00",
+  "evaluation_mode": "deterministic_live_opentargets",
+  "ensemble_required": false,
+  "n_eval_pairs": 143,
+  "gold_label_counts": {
+    "driver": 99,
+    "non_driver": 44
+  },
+  "imbalance_note": "Gold set is imbalanced (driver=99, non_driver=44). Headline Macro-F1 is class-balanced by definition; also report a balanced undersampled subset so majority-class volume cannot inflate results.",
+  "biolead_verdict_counts": {
+    "Driver": 82,
+    "Insufficient evidence": 17,
+    "Passenger": 44
+  },
+  "metrics_full_set": {
+    "exclude_abstain_from_prf": {
+      "n_rows": 143,
+      "n_scored_for_prf": 126,
+      "n_abstain": 17,
+      "abstention_rate": 0.1189,
+      "driver": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 82
+      },
+      "non_driver": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 44
+      },
+      "macro_f1": 1.0,
+      "counts": {
+        "driver_tp": 82,
+        "driver_fp": 0,
+        "driver_fn": 0,
+        "non_driver_tp": 44,
+        "non_driver_fp": 0,
+        "non_driver_fn": 0
+      }
+    },
+    "abstain_counts_as_miss": {
+      "n_rows": 143,
+      "n_scored_for_prf": 143,
+      "n_abstain": 17,
+      "abstention_rate": 0.1189,
+      "driver": {
+        "precision": 1.0,
+        "recall": 0.8283,
+        "f1": 0.9061,
+        "support": 99
+      },
+      "non_driver": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 44
+      },
+      "macro_f1": 0.953,
+      "counts": {
+        "driver_tp": 82,
+        "driver_fp": 0,
+        "driver_fn": 17,
+        "non_driver_tp": 44,
+        "non_driver_fp": 0,
+        "non_driver_fn": 0
+      }
+    }
+  },
+  "metrics_balanced_subset": {
+    "n_per_class": 44,
+    "n_total": 88,
+    "exclude_abstain_from_prf": {
+      "n_rows": 88,
+      "n_scored_for_prf": 79,
+      "n_abstain": 9,
+      "abstention_rate": 0.1023,
+      "driver": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 35
+      },
+      "non_driver": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 44
+      },
+      "macro_f1": 1.0,
+      "counts": {
+        "driver_tp": 35,
+        "driver_fp": 0,
+        "driver_fn": 0,
+        "non_driver_tp": 44,
+        "non_driver_fp": 0,
+        "non_driver_fn": 0
+      }
+    },
+    "abstain_counts_as_miss": {
+      "n_rows": 88,
+      "n_scored_for_prf": 88,
+      "n_abstain": 9,
+      "abstention_rate": 0.1023,
+      "driver": {
+        "precision": 1.0,
+        "recall": 0.7955,
+        "f1": 0.8861,
+        "support": 44
+      },
+      "non_driver": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 44
+      },
+      "macro_f1": 0.943,
+      "counts": {
+        "driver_tp": 35,
+        "driver_fp": 0,
+        "driver_fn": 9,
+        "non_driver_tp": 44,
+        "non_driver_fp": 0,
+        "non_driver_fn": 0
+      }
+    }
+  },
+  "directionality": {
+    "known_direction_cases": 3,
+    "compared": 3,
+    "correct": 3,
+    "accuracy": 1.0,
+    "known_but_biolead_unresolved": 0,
+    "direction_resolution_rate_non_abstain": 0.4603,
+    "note": "Accuracy uses only pairs with externally known therapeutic direction (AD clinical anchors). Resolution rate is reported for all non-abstain predictions."
+  },
+  "headline": {
+    "macro_f1_balanced_subset_commit_only": 1.0,
+    "macro_f1_balanced_subset_abstain_as_miss": 0.943,
+    "macro_f1_full_set_commit_only": 1.0,
+    "macro_f1_full_set_abstain_as_miss": 0.953,
+    "driver_precision_balanced_commit_only": 1.0,
+    "driver_recall_balanced_commit_only": 1.0,
+    "driver_precision_balanced_abstain_as_miss": 1.0,
+    "driver_recall_balanced_abstain_as_miss": 0.7955,
+    "non_driver_precision_balanced_commit_only": 1.0,
+    "non_driver_recall_balanced_commit_only": 1.0,
+    "non_driver_precision_balanced_abstain_as_miss": 1.0,
+    "non_driver_recall_balanced_abstain_as_miss": 1.0,
+    "abstention_rate_full": 0.1189,
+    "abstention_rate_balanced": 0.1023,
+    "directionality_accuracy_known_anchors": 1.0,
+    "direction_resolution_rate_non_abstain": 0.4603
+  },
+  "rows": [
+    {
+      "pair_id": "HP_0000964:ENSG00000169194",
+      "gene": "IL13",
+      "disease": "Eczematoid dermatitis",
+      "efo_id": "HP_0000964",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 82,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 54,
+        "actionability": 87,
+        "evidence_quality": 70,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "HP_0000964:ENSG00000105397",
+      "gene": "TYK2",
+      "disease": "Eczematoid dermatitis",
+      "efo_id": "HP_0000964",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 83,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 53,
+        "actionability": 95,
+        "evidence_quality": 78,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0004980:ENSG00000169194",
+      "gene": "IL13",
+      "disease": "atopic eczema",
+      "efo_id": "MONDO_0004980",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 86,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 61,
+        "actionability": 100,
+        "evidence_quality": 77,
+        "independent_pillars": 4
+      },
+      "expected_direction": "inhibit",
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0004980:ENSG00000077238",
+      "gene": "IL4R",
+      "disease": "atopic eczema",
+      "efo_id": "MONDO_0004980",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 58,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 30,
+        "actionability": 100,
+        "evidence_quality": 70,
+        "independent_pillars": 2
+      },
+      "expected_direction": "inhibit",
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0004980:ENSG00000162434",
+      "gene": "JAK1",
+      "disease": "atopic eczema",
+      "efo_id": "MONDO_0004980",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 58,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 29,
+        "actionability": 100,
+        "evidence_quality": 70,
+        "independent_pillars": 2
+      },
+      "expected_direction": "inhibit",
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0020804:ENSG00000128602",
+      "gene": "SMO",
+      "disease": "basal cell carcinoma",
+      "efo_id": "MONDO_0020804",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 69,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 33,
+        "actionability": 100,
+        "evidence_quality": 67,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005282:ENSG00000213689",
+      "gene": "TREX1",
+      "disease": "cutaneous lupus erythematosus",
+      "efo_id": "MONDO_0005282",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 50,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 22,
+        "actionability": 19,
+        "evidence_quality": 52,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000106546",
+      "gene": "AHR",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 82,
+      "evidence_count": 6,
+      "scorecard": {
+        "causality": 42,
+        "actionability": 100,
+        "evidence_quality": 63,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000168398",
+      "gene": "BDKRB2",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 76,
+      "evidence_count": 6,
+      "scorecard": {
+        "causality": 42,
+        "actionability": 100,
+        "evidence_quality": 49,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000141527",
+      "gene": "CARD14",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 77,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 45,
+        "actionability": 42,
+        "evidence_quality": 85,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000091831",
+      "gene": "ESR1",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 63,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 100,
+        "evidence_quality": 73,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000131187",
+      "gene": "F12",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 83,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 48,
+        "actionability": 100,
+        "evidence_quality": 71,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000088832",
+      "gene": "FKBP1A",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 58,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 100,
+        "evidence_quality": 70,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000143631",
+      "gene": "FLG",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 92,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 72,
+        "actionability": 40,
+        "evidence_quality": 92,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000113302",
+      "gene": "IL12B",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 89,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 65,
+        "actionability": 100,
+        "evidence_quality": 84,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000169194",
+      "gene": "IL13",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 86,
+      "evidence_count": 6,
+      "scorecard": {
+        "causality": 64,
+        "actionability": 100,
+        "evidence_quality": 70,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000112115",
+      "gene": "IL17A",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 66,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 100,
+        "evidence_quality": 79,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000112116",
+      "gene": "IL17F",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 87,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 55,
+        "actionability": 100,
+        "evidence_quality": 79,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000177663",
+      "gene": "IL17RA",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 68,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 36,
+        "actionability": 100,
+        "evidence_quality": 58,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000115598",
+      "gene": "IL1RL2",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 79,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 41,
+        "actionability": 100,
+        "evidence_quality": 63,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000110944",
+      "gene": "IL23A",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 82,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 40,
+        "actionability": 100,
+        "evidence_quality": 68,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000136695",
+      "gene": "IL36RN",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 66,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 35,
+        "actionability": 36,
+        "evidence_quality": 61,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000077238",
+      "gene": "IL4R",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 83,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 57,
+        "actionability": 100,
+        "evidence_quality": 72,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000160255",
+      "gene": "ITGB2",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 64,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 31,
+        "actionability": 100,
+        "evidence_quality": 75,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000162434",
+      "gene": "JAK1",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 81,
+      "evidence_count": 6,
+      "scorecard": {
+        "causality": 43,
+        "actionability": 100,
+        "evidence_quality": 60,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000096968",
+      "gene": "JAK2",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 78,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 45,
+        "actionability": 100,
+        "evidence_quality": 60,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000157404",
+      "gene": "KIT",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 73,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 38,
+        "actionability": 72,
+        "evidence_quality": 75,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000258839",
+      "gene": "MC1R",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 81,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 53,
+        "actionability": 68,
+        "evidence_quality": 66,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000137745",
+      "gene": "MMP13",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 59,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 100,
+        "evidence_quality": 64,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000137673",
+      "gene": "MMP7",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 57,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 100,
+        "evidence_quality": 59,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000113580",
+      "gene": "NR3C1",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 57,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 100,
+        "evidence_quality": 60,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000065989",
+      "gene": "PDE4A",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 57,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 34,
+        "actionability": 100,
+        "evidence_quality": 60,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000113448",
+      "gene": "PDE4D",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 75,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 40,
+        "actionability": 100,
+        "evidence_quality": 53,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000122194",
+      "gene": "PLG",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 67,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 26,
+        "actionability": 39,
+        "evidence_quality": 62,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000077092",
+      "gene": "RARB",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 60,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 100,
+        "evidence_quality": 74,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000172819",
+      "gene": "RARG",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 57,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 100,
+        "evidence_quality": 59,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000186350",
+      "gene": "RXRA",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 61,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 31,
+        "actionability": 100,
+        "evidence_quality": 69,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000149131",
+      "gene": "SERPING1",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 81,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 44,
+        "actionability": 100,
+        "evidence_quality": 93,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000232810",
+      "gene": "TNF",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 67,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 100,
+        "evidence_quality": 83,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000105397",
+      "gene": "TYK2",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 89,
+      "evidence_count": 6,
+      "scorecard": {
+        "causality": 66,
+        "actionability": 100,
+        "evidence_quality": 78,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000077498",
+      "gene": "TYR",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 86,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 55,
+        "actionability": 75,
+        "evidence_quality": 78,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0002406:ENSG00000111424",
+      "gene": "VDR",
+      "disease": "dermatitis",
+      "efo_id": "MONDO_0002406",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 66,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 100,
+        "evidence_quality": 81,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000065618",
+      "gene": "COL17A1",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 58,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 31,
+        "actionability": 44,
+        "evidence_quality": 70,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000114270",
+      "gene": "COL7A1",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 76,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 45,
+        "actionability": 100,
+        "evidence_quality": 76,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000096696",
+      "gene": "DSP",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 54,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 26,
+        "actionability": 31,
+        "evidence_quality": 60,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000151914",
+      "gene": "DST",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 50,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 22,
+        "actionability": 19,
+        "evidence_quality": 52,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000101311",
+      "gene": "FERMT1",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 58,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 22,
+        "actionability": 19,
+        "evidence_quality": 68,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000066468",
+      "gene": "FGFR2",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 52,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 23,
+        "actionability": 22,
+        "evidence_quality": 55,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000091409",
+      "gene": "ITGA6",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 55,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 27,
+        "actionability": 33,
+        "evidence_quality": 63,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000132470",
+      "gene": "ITGB4",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 59,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 31,
+        "actionability": 43,
+        "evidence_quality": 71,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000186847",
+      "gene": "KRT14",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 60,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 30,
+        "actionability": 41,
+        "evidence_quality": 74,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000186081",
+      "gene": "KRT5",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 54,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 23,
+        "actionability": 21,
+        "evidence_quality": 60,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000053747",
+      "gene": "LAMA3",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 56,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 28,
+        "actionability": 33,
+        "evidence_quality": 65,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000196878",
+      "gene": "LAMB3",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 57,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 30,
+        "actionability": 38,
+        "evidence_quality": 67,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000058085",
+      "gene": "LAMC2",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 59,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 45,
+        "evidence_quality": 72,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000081277",
+      "gene": "PKP1",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 51,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 22,
+        "actionability": 20,
+        "evidence_quality": 53,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006541:ENSG00000178209",
+      "gene": "PLEC",
+      "disease": "epidermolysis bullosa",
+      "efo_id": "MONDO_0006541",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 65,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 31,
+        "actionability": 43,
+        "evidence_quality": 85,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000144452",
+      "gene": "ABCA12",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 58,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 30,
+        "actionability": 42,
+        "evidence_quality": 68,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000179477",
+      "gene": "ALOX12B",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 56,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 28,
+        "actionability": 36,
+        "evidence_quality": 65,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000179148",
+      "gene": "ALOXE3",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 52,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 23,
+        "actionability": 22,
+        "evidence_quality": 55,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000204539",
+      "gene": "CDSN",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 57,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 29,
+        "actionability": 40,
+        "evidence_quality": 66,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000154227",
+      "gene": "CERS3",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 50,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 22,
+        "actionability": 21,
+        "evidence_quality": 52,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000163347",
+      "gene": "CLDN1",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 54,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 26,
+        "actionability": 32,
+        "evidence_quality": 60,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000121552",
+      "gene": "CSTA",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 55,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 27,
+        "actionability": 32,
+        "evidence_quality": 62,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000143631",
+      "gene": "FLG",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 66,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 38,
+        "actionability": 41,
+        "evidence_quality": 60,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000167768",
+      "gene": "KRT1",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 57,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 29,
+        "actionability": 37,
+        "evidence_quality": 67,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000186395",
+      "gene": "KRT10",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 59,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 45,
+        "evidence_quality": 71,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000172867",
+      "gene": "KRT2",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 58,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 31,
+        "actionability": 45,
+        "evidence_quality": 70,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000172548",
+      "gene": "NIPAL4",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 51,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 23,
+        "actionability": 21,
+        "evidence_quality": 54,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000180316",
+      "gene": "PNPLA1",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 52,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 23,
+        "actionability": 21,
+        "evidence_quality": 55,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000170426",
+      "gene": "SDR9C7",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 50,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 22,
+        "actionability": 21,
+        "evidence_quality": 52,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000133710",
+      "gene": "SPINK5",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 60,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 30,
+        "actionability": 40,
+        "evidence_quality": 73,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000149418",
+      "gene": "ST14",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 59,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 29,
+        "actionability": 41,
+        "evidence_quality": 72,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019269:ENSG00000092295",
+      "gene": "TGM1",
+      "disease": "ichthyosis",
+      "efo_id": "MONDO_0019269",
+      "gold_label": "driver",
+      "biolead_verdict": "Insufficient evidence",
+      "biolead_direction": "unresolved",
+      "confidence": 51,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 22,
+        "actionability": 19,
+        "evidence_quality": 54,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000157764",
+      "gene": "BRAF",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 91,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 49,
+        "actionability": 100,
+        "evidence_quality": 88,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000147889",
+      "gene": "CDKN2A",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 90,
+      "evidence_count": 6,
+      "scorecard": {
+        "causality": 65,
+        "actionability": 44,
+        "evidence_quality": 80,
+        "independent_pillars": 5
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000163599",
+      "gene": "CTLA4",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 89,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 55,
+        "actionability": 100,
+        "evidence_quality": 85,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000134460",
+      "gene": "IL2RA",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 76,
+      "evidence_count": 6,
+      "scorecard": {
+        "causality": 41,
+        "actionability": 100,
+        "evidence_quality": 49,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000169032",
+      "gene": "MAP2K1",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 81,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 38,
+        "actionability": 100,
+        "evidence_quality": 93,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000126934",
+      "gene": "MAP2K2",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 78,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 37,
+        "actionability": 100,
+        "evidence_quality": 86,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000187098",
+      "gene": "MITF",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 84,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 45,
+        "actionability": 27,
+        "evidence_quality": 74,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005083:ENSG00000106546",
+      "gene": "AHR",
+      "disease": "psoriasis",
+      "efo_id": "MONDO_0005083",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 80,
+      "evidence_count": 6,
+      "scorecard": {
+        "causality": 40,
+        "actionability": 100,
+        "evidence_quality": 58,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005083:ENSG00000141527",
+      "gene": "CARD14",
+      "disease": "psoriasis",
+      "efo_id": "MONDO_0005083",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 73,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 42,
+        "actionability": 37,
+        "evidence_quality": 69,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005083:ENSG00000113302",
+      "gene": "IL12B",
+      "disease": "psoriasis",
+      "efo_id": "MONDO_0005083",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 87,
+      "evidence_count": 6,
+      "scorecard": {
+        "causality": 65,
+        "actionability": 100,
+        "evidence_quality": 74,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005083:ENSG00000177663",
+      "gene": "IL17RA",
+      "disease": "psoriasis",
+      "efo_id": "MONDO_0005083",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 66,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 36,
+        "actionability": 100,
+        "evidence_quality": 54,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005083:ENSG00000110944",
+      "gene": "IL23A",
+      "disease": "psoriasis",
+      "efo_id": "MONDO_0005083",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 81,
+      "evidence_count": 6,
+      "scorecard": {
+        "causality": 40,
+        "actionability": 100,
+        "evidence_quality": 61,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005083:ENSG00000136695",
+      "gene": "IL36RN",
+      "disease": "psoriasis",
+      "efo_id": "MONDO_0005083",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 64,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 30,
+        "actionability": 20,
+        "evidence_quality": 48,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005083:ENSG00000160255",
+      "gene": "ITGB2",
+      "disease": "psoriasis",
+      "efo_id": "MONDO_0005083",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 63,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 31,
+        "actionability": 100,
+        "evidence_quality": 74,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005083:ENSG00000065989",
+      "gene": "PDE4A",
+      "disease": "psoriasis",
+      "efo_id": "MONDO_0005083",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 57,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 34,
+        "actionability": 100,
+        "evidence_quality": 60,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005083:ENSG00000232810",
+      "gene": "TNF",
+      "disease": "psoriasis",
+      "efo_id": "MONDO_0005083",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 65,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 100,
+        "evidence_quality": 78,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005083:ENSG00000105397",
+      "gene": "TYK2",
+      "disease": "psoriasis",
+      "efo_id": "MONDO_0005083",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 91,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 63,
+        "actionability": 100,
+        "evidence_quality": 89,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005083:ENSG00000111424",
+      "gene": "VDR",
+      "disease": "psoriasis",
+      "efo_id": "MONDO_0005083",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 65,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 32,
+        "actionability": 100,
+        "evidence_quality": 77,
+        "independent_pillars": 2
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "EFO_1001494:ENSG00000113302",
+      "gene": "IL12B",
+      "disease": "psoriasis vulgaris",
+      "efo_id": "EFO_1001494",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 87,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 63,
+        "actionability": 100,
+        "evidence_quality": 79,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "EFO_1001494:ENSG00000105397",
+      "gene": "TYK2",
+      "disease": "psoriasis vulgaris",
+      "efo_id": "EFO_1001494",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 85,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 60,
+        "actionability": 100,
+        "evidence_quality": 76,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005492:ENSG00000168398",
+      "gene": "BDKRB2",
+      "disease": "urticaria",
+      "efo_id": "MONDO_0005492",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 75,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 39,
+        "actionability": 100,
+        "evidence_quality": 53,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005492:ENSG00000131187",
+      "gene": "F12",
+      "disease": "urticaria",
+      "efo_id": "MONDO_0005492",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 83,
+      "evidence_count": 5,
+      "scorecard": {
+        "causality": 48,
+        "actionability": 100,
+        "evidence_quality": 71,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005492:ENSG00000157404",
+      "gene": "KIT",
+      "disease": "urticaria",
+      "efo_id": "MONDO_0005492",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "unresolved",
+      "confidence": 62,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 28,
+        "actionability": 43,
+        "evidence_quality": 52,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005492:ENSG00000149131",
+      "gene": "SERPING1",
+      "disease": "urticaria",
+      "efo_id": "MONDO_0005492",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 81,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 44,
+        "actionability": 100,
+        "evidence_quality": 93,
+        "independent_pillars": 3
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0008661:ENSG00000077498",
+      "gene": "TYR",
+      "disease": "vitiligo",
+      "efo_id": "MONDO_0008661",
+      "gold_label": "driver",
+      "biolead_verdict": "Driver",
+      "biolead_direction": "inhibit",
+      "confidence": 84,
+      "evidence_count": 6,
+      "scorecard": {
+        "causality": 52,
+        "actionability": 75,
+        "evidence_quality": 66,
+        "independent_pillars": 4
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0019082:ENSG00000196352",
+      "gene": "CD55",
+      "disease": "bullous pemphigoid",
+      "efo_id": "MONDO_0019082",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 20,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 43,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005012:ENSG00000073282",
+      "gene": "TP63",
+      "disease": "cutaneous melanoma",
+      "efo_id": "MONDO_0005012",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 20,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 44,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000060339",
+      "gene": "CCAR1",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 31,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 76,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000150637",
+      "gene": "CD226",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 31,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 76,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000010610",
+      "gene": "CD4",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 37,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 91,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000153563",
+      "gene": "CD8A",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 36,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 89,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000133048",
+      "gene": "CHI3L1",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 31,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 74,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000169245",
+      "gene": "CXCL10",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 32,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 79,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000196126",
+      "gene": "HLA-DRB1",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 33,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 81,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000090339",
+      "gene": "ICAM1",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 29,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 71,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000115267",
+      "gene": "IFIH1",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 40,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 98,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000197919",
+      "gene": "IFNA1",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 29,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 9,
+        "evidence_quality": 67,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000111537",
+      "gene": "IFNG",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 34,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 83,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000150782",
+      "gene": "IL18",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 30,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 72,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000136244",
+      "gene": "IL6",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 32,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 78,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000168961",
+      "gene": "LGALS9",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 31,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 74,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000185499",
+      "gene": "MUC1",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 33,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 80,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000116981",
+      "gene": "NT5C1A",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 30,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 72,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000104918",
+      "gene": "RETN",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 31,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 74,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000107201",
+      "gene": "RIGI",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 34,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 82,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000132109",
+      "gene": "TRIM21",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 32,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 79,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000122779",
+      "gene": "TRIM24",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 33,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 80,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000197323",
+      "gene": "TRIM33",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 38,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 94,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0016367:ENSG00000162692",
+      "gene": "VCAM1",
+      "disease": "dermatomyositis",
+      "efo_id": "MONDO_0016367",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 30,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 72,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005348:ENSG00000141510",
+      "gene": "TP53",
+      "disease": "keloid",
+      "efo_id": "MONDO_0005348",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 32,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 79,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006572:ENSG00000010610",
+      "gene": "CD4",
+      "disease": "lichen planus",
+      "efo_id": "MONDO_0006572",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 35,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 87,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006572:ENSG00000153563",
+      "gene": "CD8A",
+      "disease": "lichen planus",
+      "efo_id": "MONDO_0006572",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 36,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 89,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006572:ENSG00000169429",
+      "gene": "CXCL8",
+      "disease": "lichen planus",
+      "efo_id": "MONDO_0006572",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 35,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 86,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006572:ENSG00000111537",
+      "gene": "IFNG",
+      "disease": "lichen planus",
+      "efo_id": "MONDO_0006572",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 37,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 90,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006572:ENSG00000112115",
+      "gene": "IL17A",
+      "disease": "lichen planus",
+      "efo_id": "MONDO_0006572",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 29,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 9,
+        "evidence_quality": 67,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006572:ENSG00000113520",
+      "gene": "IL4",
+      "disease": "lichen planus",
+      "efo_id": "MONDO_0006572",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 33,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 81,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006572:ENSG00000136244",
+      "gene": "IL6",
+      "disease": "lichen planus",
+      "efo_id": "MONDO_0006572",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 35,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 85,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0006572:ENSG00000239732",
+      "gene": "TLR9",
+      "disease": "lichen planus",
+      "efo_id": "MONDO_0006572",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 25,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 11,
+        "evidence_quality": 53,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000189079",
+      "gene": "ARID2",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 32,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 77,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000100697",
+      "gene": "DICER1",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 37,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 90,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000156052",
+      "gene": "GNAQ",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 46,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 5,
+        "evidence_quality": 82,
+        "independent_pillars": 1
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000135679",
+      "gene": "MDM2",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 37,
+      "evidence_count": 4,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 12,
+        "evidence_quality": 58,
+        "independent_pillars": 1
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000196712",
+      "gene": "NF1",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 51,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 5,
+        "evidence_quality": 96,
+        "independent_pillars": 1
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000213281",
+      "gene": "NRAS",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 49,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 3,
+        "evidence_quality": 93,
+        "independent_pillars": 1
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000119414",
+      "gene": "PPP6C",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 35,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 85,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000136238",
+      "gene": "RAC1",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 42,
+      "evidence_count": 3,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 77,
+        "independent_pillars": 1
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000181555",
+      "gene": "SETD2",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 20,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 43,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000115524",
+      "gene": "SF3B1",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 30,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 71,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    },
+    {
+      "pair_id": "MONDO_0005105:ENSG00000118046",
+      "gene": "STK11",
+      "disease": "melanoma",
+      "efo_id": "MONDO_0005105",
+      "gold_label": "non_driver",
+      "biolead_verdict": "Passenger",
+      "biolead_direction": "unresolved",
+      "confidence": 38,
+      "evidence_count": 2,
+      "scorecard": {
+        "causality": 0,
+        "actionability": 0,
+        "evidence_quality": 93,
+        "independent_pillars": 0
+      },
+      "expected_direction": null,
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "corpus": "demo_golden_v1",
+  "disease": "Atopic dermatitis",
+  "rules_version": "score:1.1.0|prov:1.0.0|falsify:1.0.0|ensemble:1.0.0",
+  "frozen": true,
+  "note": "Presentation path uses Demo mode against this fixture corpus. Live APIs are optional.",
+  "cases": {
+    "IL4R": {
+      "expected_verdict": "Driver",
+      "verdict": "Driver",
+      "direction": "inhibit",
+      "snapshot_id": "BL-IL4R-AtopicDerm-0ac22b62a703",
+      "content_hash": "0ac22b62a7030ce6d1184d77f835f90e4322b4ac59fe644f82eb36bd78cad7e0",
+      "falsification_status": "PASSED"
+    },
+    "FLG": {
+      "expected_verdict": "Insufficient evidence",
+      "verdict": "Insufficient evidence",
+      "direction": "activate",
+      "snapshot_id": "BL-FLG-AtopicDerm-251456b29a22",
+      "content_hash": "251456b29a22326affad5313287ae9afbadcd6188921769acf9deec6158cddb9",
+      "falsification_status": "UNRESOLVED"
+    },
+    "S100A8": {
+      "expected_verdict": "Passenger",
+      "verdict": "Passenger",
+      "direction": "unresolved",
+      "snapshot_id": "BL-S100A8-AtopicDerm-441ed42f124b",
+      "content_hash": "441ed42f124b0760911228ee333e3e1f061eb82c63ffd81a73a1bb61f344da5d",
+      "falsification_status": "PASSED"
+    }
+  },
+  "eval_all_passed": true
+}
