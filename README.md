@@ -1,7 +1,5 @@
 # BioLead Evidence Workbench
 
-**Clara** is BioLead's supervisor reasoning agent. She controls the session — disease, candidates, evidence, scores, verdicts, and the next move on the causal chain. The workbench is the surface she operates; Clara is the agent in charge.
-
 BioLead is a causal gene-prioritization product for dermatology. It separates **Driver**, **Passenger**, and **Insufficient evidence** calls with a scored, citable dossier. Scientists submit a disease and genes; Clara oversees Retrieve → Extract → Score → Falsify → Decide, explains the dossier, and can take control of the next run — a close-pair rerun, a Live retrieve, a literature search, or a challenge to the current call.
 
 **Live demo:** https://biolead-ai-agent-eight.vercel.app
