@@ -1,20 +1,18 @@
 # BioLead Evidence Workbench
 
-BioLead is a causal gene-prioritization product for dermatology. It separates **Driver**, **Passenger**, and **Insufficient evidence** calls with a scored, citable dossier. Scientists submit a disease and genes; Clara oversees Retrieve → Extract → Score → Falsify → Decide, explains the dossier, and can take control of the next run — a close-pair rerun, a Live retrieve, a literature search, or a challenge to the current call.
+BioLead is a causal gene-prioritization product for dermatology. It separates **Driver**, **Passenger**, and **Insufficient evidence** calls with a scored, citable dossier. Scientists submit a disease and genes, Clara oversees Retrieve → Extract → Score → Falsify → Decide, explains the dossier, and can take control of the next run, a close-pair rerun, a Live retrieve, a literature search, or a challenge to the current call.
 
 **Live demo:** https://biolead-ai-agent-eight.vercel.app
 
 
-Research use only — not clinical decision support.
-
 ## Clara — supervisor reasoning agent
 
-Clara watches every part of the run and can act on it:
+Clara as the brain of the workbench watches every part of the run and can act on it:
 
 - **Sees** the disease, gene list, Demo/Live mode, evidence cards, scorecard, falsification, and verdict
 - **Explains** the causal chain in the scientist's language — citations, pillars, why a call landed
 - **Controls** the next step: queue a neighbour gene, switch to Live, retrieve papers, focus a candidate, or stress-test the verdict
-- **Drives** the workbench after Confirm — disease, genes, mode, and Run analysis
+- **Drives** the workbench after Confirm: disease, genes, mode, and Run analysis
 
 ## What you get
 
@@ -41,7 +39,7 @@ Clara watches every part of the run and can act on it:
 4. **Falsify** the leading call against counter-evidence.
 5. **Decide** Driver / Passenger / Insufficient, with an exportable dossier.
 
-Clara supervises that chain and can take control of it. She queues the next pair, switches the workbench to Live, and runs the analysis so the scientist can compare calls without leaving the session.
+Clara supervises that chain and can take control of it. It queues the next pair, switches the workbench to Live, and runs the analysis so the scientist can compare calls without leaving the session.
 
 Full rubric: [`docs/reasoning-rubric.md`](docs/reasoning-rubric.md).
 
