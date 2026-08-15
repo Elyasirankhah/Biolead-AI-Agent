@@ -19,6 +19,7 @@ export function AuthBar({ onSessionChange, open: controlledOpen, onOpenChange }:
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const open = controlledOpen ?? internalOpen;
+  const ready = supabaseConfigured();
 
   function setOpen(next: boolean) {
     onOpenChange?.(next);
@@ -42,14 +43,13 @@ export function AuthBar({ onSessionChange, open: controlledOpen, onOpenChange }:
     return () => sub.subscription.unsubscribe();
   }, [onSessionChange]);
 
-  if (!supabaseConfigured()) {
-    return <span className="badge" data-testid="auth-guest">Guest</span>;
-  }
-
   async function submit(e: FormEvent) {
     e.preventDefault();
     const sb = getSupabase();
-    if (!sb) return;
+    if (!sb) {
+      setError("Sign-in is not connected on this host yet.");
+      return;
+    }
     setBusy(true);
     setError(null);
     try {
@@ -100,42 +100,53 @@ export function AuthBar({ onSessionChange, open: controlledOpen, onOpenChange }:
         Sign in
       </button>
       {open && (
-        <form className="auth-panel" onSubmit={submit} data-testid="auth-panel">
-          <div className="auth-tabs">
-            <button type="button" className={mode === "signin" ? "on" : ""} onClick={() => setMode("signin")}>
-              Sign in
+        <>
+          <button
+            type="button"
+            className="auth-backdrop"
+            aria-label="Close sign in"
+            onClick={() => setOpen(false)}
+          />
+          <form className="auth-panel" onSubmit={submit} data-testid="auth-panel">
+            <div className="auth-tabs">
+              <button type="button" className={mode === "signin" ? "on" : ""} onClick={() => setMode("signin")}>
+                Sign in
+              </button>
+              <button type="button" className={mode === "signup" ? "on" : ""} onClick={() => setMode("signup")}>
+                Sign up
+              </button>
+            </div>
+            <label>
+              Email
+              <input
+                type="email"
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </label>
+            <label>
+              Password
+              <input
+                type="password"
+                autoComplete={mode === "signup" ? "new-password" : "current-password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                minLength={6}
+                required
+              />
+            </label>
+            {error && <p className="auth-error">{error}</p>}
+            {!ready && !error && (
+              <p className="auth-error">Add Supabase URL and anon key on the web host to enable accounts.</p>
+            )}
+            <button type="submit" className="btn-ghost auth-submit" disabled={busy || !ready}>
+              {busy ? "Working\u2026" : mode === "signup" ? "Create account" : "Sign in"}
             </button>
-            <button type="button" className={mode === "signup" ? "on" : ""} onClick={() => setMode("signup")}>
-              Sign up
-            </button>
-          </div>
-          <label>
-            Email
-            <input
-              type="email"
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Password
-            <input
-              type="password"
-              autoComplete={mode === "signup" ? "new-password" : "current-password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              minLength={6}
-              required
-            />
-          </label>
-          {error && <p className="auth-error">{error}</p>}
-          <button type="submit" className="btn-ghost auth-submit" disabled={busy}>
-            {busy ? "Working\u2026" : mode === "signup" ? "Create account" : "Sign in"}
-          </button>
-          <p className="auth-hint">The workbench works as a guest. Clara unlocks after sign-in so chats can be saved to your account.</p>
-        </form>
+            <p className="auth-hint">Clara, the supervisor reasoning agent, unlocks after sign-in so the session can be saved.</p>
+          </form>
+        </>
       )}
     </div>
   );

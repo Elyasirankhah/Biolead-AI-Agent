@@ -209,12 +209,18 @@ nav {
   font-size: 13px; color: var(--text2);
 }
 .auth-stats { max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.auth-backdrop {
+  position: fixed; inset: 0; z-index: 1500;
+  border: 0; padding: 0; margin: 0;
+  background: rgba(8, 12, 16, 0.45);
+  cursor: default;
+}
 .auth-panel {
-  position: absolute; top: calc(100% + 8px); right: 0; z-index: 40;
-  width: 280px; padding: 14px; display: grid; gap: 10px;
+  position: fixed; top: 88px; right: max(24px, var(--px)); z-index: 1600;
+  width: min(320px, calc(100vw - 32px)); padding: 16px; display: grid; gap: 10px;
   border: 1px solid var(--border-hi); border-radius: 14px;
   background: var(--bg2);
-  box-shadow: 0 24px 48px -24px rgba(0,0,0,0.55);
+  box-shadow: 0 24px 64px -16px rgba(0,0,0,0.55);
   text-align: left;
 }
 .auth-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 3px; border-radius: 10px; background: var(--surface) }
