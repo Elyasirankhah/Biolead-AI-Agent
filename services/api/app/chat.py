@@ -368,6 +368,45 @@ def _choose_close_gene(
     return pool[0][2], pool[0][3]
 
 
+_PANEL_COUNT_RE = re.compile(
+    r"\b(?:make it|run|try|use|give me|do|queue)\s+(\d{1,2})\s+genes?\b"
+    r"|\b(\d{1,2})\s+(?:closest\s+)?genes?\b",
+    re.I,
+)
+
+
+def _requested_gene_count(text: str) -> int | None:
+    match = _PANEL_COUNT_RE.search(text or "")
+    if not match:
+        return None
+    for group in match.groups():
+        if not group:
+            continue
+        count = int(group)
+        if 2 <= count <= 8:
+            return count
+    return None
+
+
+def _choose_close_panel(
+    disease: str,
+    focused: str,
+    session_genes: list[str],
+    prior_pairs: list[tuple[str, str]],
+    count: int,
+) -> tuple[list[str], str]:
+    """Keep the focused gene and fill to N closest pathway neighbours on this disease."""
+    start = (focused or (session_genes[0] if session_genes else "")).strip()
+    picked: list[str] = [start] if start else []
+    while len(picked) < count:
+        nxt, _reason = _choose_close_gene(disease, picked, prior_pairs, start)
+        if not nxt:
+            break
+        picked.append(nxt)
+    reason = f"closest {len(picked)} to {start}" if start else f"{len(picked)}-gene panel"
+    return picked, reason
+
+
 def _choose_across_disease(current_disease: str, focused: str, session_genes: list[str]) -> tuple[str, str, str]:
     next_disease = _related_disease(current_disease)
     panel = [g.upper() for g in _panel_for(next_disease)]
@@ -523,14 +562,25 @@ def _plan_rerun(text: str, context: dict[str, Any]) -> dict[str, Any] | None:
     wants_close = _contains(text, _CLOSE_PAIR_HINTS)
     wants_new_disease = _contains(text, _CLOSE_DISEASE_HINTS)
     wants_rerun = _contains(text, _RERUN_HINTS)
+    panel_count = _requested_gene_count(text)
     removed = _extract_removed_genes(text, session_genes)
     instead = _extract_instead_of(text, session_genes)
-    if not (wants_close or wants_new_disease or wants_rerun or removed or instead):
+    if not (wants_close or wants_new_disease or wants_rerun or removed or instead or panel_count):
         return None
 
     next_disease = _extract_disease(text, disease)
     if wants_new_disease and next_disease.lower() == (disease or "").strip().lower():
         next_disease = _related_disease(disease)
+
+    if panel_count:
+        genes, reason = _choose_close_panel(next_disease, focused, session_genes, prior, panel_count)
+        if genes:
+            return {
+                "type": "rerun",
+                "disease": next_disease,
+                "genes": genes,
+                "reason": f"panel:{reason}",
+            }
 
     if removed or instead:
         anchor = instead or (removed[-1] if removed else focused)
@@ -991,6 +1041,9 @@ def _action_from_command(command: dict[str, Any], context: dict[str, Any]) -> Cl
         if reason.startswith("close_pair"):
             note = reason.split(":", 1)[1] if ":" in reason else "close pair"
             suffix = f"  (close pair · {note})"
+        elif reason.startswith("panel"):
+            note = reason.split(":", 1)[1] if ":" in reason else "closest panel"
+            suffix = f"  ({note})"
         return ClaraAction(
             type="rerun",
             label=f"Re-run BioLead for {disease} · {gene_s}" + suffix,
@@ -1291,6 +1344,16 @@ def _pending_rerun_reply(context: dict[str, Any], item: ClaraAction, style: str)
     current = _session_genes(context)
     dropped = [g for g in current if g not in (item.genes or [])]
     drop = f" Dropping {', '.join(dropped)} — this run is only {gene_s}." if dropped else ""
+    if item.reason and item.reason.startswith("panel"):
+        note = item.reason.split(":", 1)[-1].strip()
+        return _pick_line(
+            style,
+            [
+                f"I'll run {disease} with {len(item.genes)} closest genes to {gene}: {gene_s} ({note}).{drop} Confirm and I'll switch to Live.",
+                f"Same disease, {len(item.genes)}-gene panel — {gene_s}. {note}.{drop} Confirm to Live-run that set.",
+                f"{gene_s} are the closest neighbours on {disease}.{drop} Confirm and I'll retrieve that panel on Live.",
+            ],
+        )
     note = _close_pair_note(item)
     if note:
         return _pick_line(

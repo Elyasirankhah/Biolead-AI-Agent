@@ -95,6 +95,16 @@ def test_natural_close_and_change_disease():
     assert cmd["genes"] == ["TYK2"]
 
 
+def test_make_it_five_genes_keeps_disease_and_closest_neighbours():
+    cmd = parse_commands("make it 5 genes", CTX)[0]
+    assert cmd["type"] == "rerun"
+    assert cmd["disease"] == "Atopic dermatitis"
+    assert cmd["genes"][0] == "IL4R"
+    assert len(cmd["genes"]) == 5
+    assert "IL13" in cmd["genes"]
+    assert cmd["reason"].startswith("panel:closest 5 to IL4R")
+
+
 def test_same_disease_close_pair_picks_il13_with_evidence_pack():
     cmd = parse_commands("let's try a close pair with the same disease", CTX)[0]
     assert cmd["genes"] == ["IL13"]
@@ -446,6 +456,28 @@ def _assert_human_voice(reply: str) -> None:
         assert phrase not in lower, f"robot phrase in Clara reply: {phrase!r}\n{reply}"
     assert reply[0].isupper(), reply
     assert "×" in reply or "x" in lower or any(g in reply for g in ("IL4R", "IL13", "FLG", "S100A8", "JAK1"))
+
+
+@pytest.mark.asyncio
+async def test_make_it_five_genes_via_chat_completion():
+    from app.chat import ChatMessage, ChatRequest, chat_completion
+
+    res = await chat_completion(
+        ChatRequest(
+            run_id="five-genes",
+            messages=[ChatMessage(role="user", content="make it 5 genes")],
+            context=CTX,
+        )
+    )
+    assert res.pending
+    genes = res.pending[0].genes
+    assert res.pending[0].disease == "Atopic dermatitis"
+    assert genes[0] == "IL4R"
+    assert len(genes) == 5
+    assert "IL13" in genes
+    assert "5" in res.reply or "closest" in res.reply.lower()
+    assert "Live" in res.reply
+    assert "IL4R" in res.reply
 
 
 @pytest.mark.asyncio

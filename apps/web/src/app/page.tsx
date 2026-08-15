@@ -442,6 +442,17 @@ function pickClosePair(disease: string, sessionGenes: string[], focused: string,
   return { gene: "", reason: "" };
 }
 
+function pickClosePanel(disease: string, sessionGenes: string[], focused: string, count: number): { genes: string[]; reason: string } {
+  const start = focused || sessionGenes[0] || "";
+  const picked = start ? [start] : [];
+  while (picked.length < count) {
+    const next = pickClosePair(disease, picked, start);
+    if (!next.gene) break;
+    picked.push(next.gene);
+  }
+  return { genes: picked, reason: start ? `closest ${picked.length} to ${start}` : `${picked.length}-gene panel` };
+}
+
 type ClaraSession = {
   chat_id: string;
   title: string;
@@ -582,7 +593,24 @@ function inferPendingCommand(
   );
   const isNewDisease = /\b(close disease|related disease|nearby disease|similar disease|another disease|different disease|change the diea?ses?|change disease|new disease|switch disease|diea?ses? as well|disease as well)\b/.test(lower);
   const isRerun = /\b(rerun|re-run|run again|run another|another run|another analysis|refresh|reanalyze)\b/.test(lower);
+  const panelMatch = lower.match(/\b(?:make it|run|try|use|give me|do|queue)\s+(\d{1,2})\s+genes?\b|\b(\d{1,2})\s+(?:closest\s+)?genes?\b/);
+  const panelCount = panelMatch ? Number(panelMatch[1] || panelMatch[2]) : 0;
   const genes = geneList.split(",").map((g) => g.trim()).filter(Boolean);
+  if (panelCount >= 2 && panelCount <= 8) {
+    const panel = pickClosePanel(disease, genes, focused, panelCount);
+    const geneS = panel.genes.join(", ");
+    const label = `Re-run BioLead for ${disease} · ${geneS}  (${panel.reason})`;
+    return {
+      status: "pending",
+      label,
+      action: { type: "rerun", label, gene: panel.genes[0] || focused, disease, genes: panel.genes, reason: `panel:${panel.reason}` },
+      fromDisease: disease,
+      toDisease: disease,
+      fromGenes: geneList,
+      toGenes: geneS,
+      fromMode: mode,
+    };
+  }
   if (isSearch) {
     const named = extractNamedGenes(text, genes, focused);
     const gene = named[0] || focused;
