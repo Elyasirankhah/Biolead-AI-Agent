@@ -1267,7 +1267,7 @@ function Clara({
             </div>
             <div>
               <h3>Clara</h3>
-              <span className="clara-subtitle">Your session companion</span>
+              <span className="clara-subtitle">Supervisor reasoning agent</span>
               <span className="clara-memory">
                 {scientist.signed_in ? "Memory on" : "Guest · sign in for memory"}
               </span>
@@ -1288,8 +1288,8 @@ function Clara({
           <div className="clara-welcome">
             <p>
               {scientist.signed_in && scientist.name ? "Hey. " : "Hi. "}
-              I&apos;m Clara, your companion on this {mode} run. I&apos;m overseeing <strong>{disease}</strong> ({geneList}) with you.
-              What should we press on in this dossier — the verdict, the citations, or a close pair?
+              I&apos;m Clara, the supervisor reasoning agent on this {mode} run. I control the session — <strong>{disease}</strong> ({geneList}), the evidence, and the next step on the chain.
+              Verdict, citations, or a close pair?
             </p>
             {optionButtons}
           </div>
@@ -1953,8 +1953,8 @@ export default function Home() {
           <div className="clara-bubble-text">
             {signedIn ? (
               <>
-                <strong>Clara is with you</strong>
-                <span>Your companion on this run &rarr;</span>
+                <strong>Clara is supervising this run</strong>
+                <span>Controls the causal chain &rarr;</span>
               </>
             ) : (
               <>

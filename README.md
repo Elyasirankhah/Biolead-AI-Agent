@@ -1,20 +1,29 @@
 # BioLead Evidence Workbench
 
-BioLead is a causal gene-prioritization product for dermatology. It separates **Driver**, **Passenger**, and **Insufficient evidence** calls with a scored, citable dossier — not a literature summary.
+**Clara** is BioLead's supervisor reasoning agent. She controls the session — disease, candidates, evidence, scores, verdicts, and the next move on the causal chain. The workbench is the surface she operates; Clara is the agent in charge.
 
-Scientists submit a disease and candidate genes. BioLead retrieves evidence, extracts provenance, scores the causal chain, falsifies the call, and returns a decision brief. **Clara** is the supervisor reasoning layer: she watches the session, explains the dossier, and can steer the next step of the chain — a close-pair rerun, a Live retrieve, a literature search, or a challenge to the current verdict.
+BioLead is a causal gene-prioritization product for dermatology. It separates **Driver**, **Passenger**, and **Insufficient evidence** calls with a scored, citable dossier. Scientists submit a disease and genes; Clara oversees Retrieve → Extract → Score → Falsify → Decide, explains the dossier, and can take control of the next run — a close-pair rerun, a Live retrieve, a literature search, or a challenge to the current call.
 
 **Live demo:** https://biolead-ai-agent-eight.vercel.app
 
 Research use only — not clinical decision support.
 
+## Clara — supervisor reasoning agent
+
+Clara watches every part of the run and can act on it:
+
+- **Sees** the disease, gene list, Demo/Live mode, evidence cards, scorecard, falsification, and verdict
+- **Explains** the causal chain in the scientist's language — citations, pillars, why a call landed
+- **Controls** the next step: queue a neighbour gene, switch to Live, retrieve papers, focus a candidate, or stress-test the verdict
+- **Drives** the workbench after Confirm — disease, genes, mode, and Run analysis
+
 ## What you get
 
 | Surface | Role |
 | --- | --- |
+| **Clara** | Supervisor reasoning agent — controls the session and the causal chain |
 | **Workbench** | Disease, candidates, Demo/Live mode, verdicts, and the focused dossier |
 | **Causal pipeline** | Retrieve → Extract → Score → Falsify → Decide |
-| **Clara** | Session supervisor — watches scores, evidence, and verdicts; can take the next action on the chain |
 | **Evidence** | Open Targets, Europe PMC, and GWAS Catalog in Live mode; seeded dermatology packs in Demo |
 
 ### Seeded demo (atopic dermatitis)
@@ -33,7 +42,7 @@ Research use only — not clinical decision support.
 4. **Falsify** the leading call against counter-evidence.
 5. **Decide** Driver / Passenger / Insufficient, with an exportable dossier.
 
-Clara sits above that chain. She can queue a neighbour gene, switch the workbench to Live, and run the next pair so the scientist can compare calls without leaving the session.
+Clara supervises that chain and can take control of it. She queues the next pair, switches the workbench to Live, and runs the analysis so the scientist can compare calls without leaving the session.
 
 Full rubric: [`docs/reasoning-rubric.md`](docs/reasoning-rubric.md).
 
@@ -101,8 +110,8 @@ npm run test:e2e
 ## Repository
 
 ```
-apps/web/          Next.js workbench and Clara
-services/api/      FastAPI retrieve, score, falsify, decide, and Clara
+apps/web/          Next.js workbench — Clara's control surface
+services/api/      FastAPI pipeline and Clara, the supervisor reasoning agent
 docs/              Rubric, model card, architecture
 fixtures/          Seeded dermatology evidence packs
 docker-compose.yml Local stack (web + api + mongo + redis)
