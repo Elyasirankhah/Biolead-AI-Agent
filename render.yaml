@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: Biolead-AI-Agent
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: SUPABASE_URL
+        value: https://ydtjohrtpesfypyhggge.supabase.co
+      - key: SUPABASE_JWKS_URL
+        value: https://ydtjohrtpesfypyhggge.supabase.co/auth/v1/.well-known/jwks.json
+      - key: AUTH_REQUIRED
+        value: "false"
+      - key: CORS_ORIGINS
+        value: https://biolead-ai-agent-eight.vercel.app,http://localhost:3000,http://127.0.0.1:3000

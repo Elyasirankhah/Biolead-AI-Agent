@@ -34,6 +34,8 @@ services:
       MONGODB_DB: biolead
       REDIS_URL: redis://redis:6379/0
       CACHE_TTL_HOURS: "24"
+      SUPABASE_URL: https://ydtjohrtpesfypyhggge.supabase.co
+      SUPABASE_JWKS_URL: https://ydtjohrtpesfypyhggge.supabase.co/auth/v1/.well-known/jwks.json
     depends_on:
       mongo:
         condition: service_healthy
@@ -50,10 +52,14 @@ services:
       context: ./apps/web
       args:
         NEXT_PUBLIC_API_URL: http://localhost:8000
+        NEXT_PUBLIC_SUPABASE_URL: https://ydtjohrtpesfypyhggge.supabase.co
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: sb_publishable_DFKaqUKGkPpD3ugRpgeAcQ_BMx258qp
     ports:
       - "3000:3000"
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:8000
+      NEXT_PUBLIC_SUPABASE_URL: https://ydtjohrtpesfypyhggge.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: sb_publishable_DFKaqUKGkPpD3ugRpgeAcQ_BMx258qp
     depends_on:
       api:
         condition: service_healthy
